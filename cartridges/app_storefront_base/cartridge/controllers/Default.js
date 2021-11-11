@@ -17,6 +17,7 @@ var pageMetaData = require('*/cartridge/scripts/middleware/pageMetaData');
  * @function
  * @memberof Default
  * @param {middleware} - consentTracking.consent
+ * @param {middleware} - userLoggedIn.validateLoggedIn
  * @param {middleware} - cache.applyDefaultCache
  * @param {category} - non-sensitive
  * @param {renders} - isml

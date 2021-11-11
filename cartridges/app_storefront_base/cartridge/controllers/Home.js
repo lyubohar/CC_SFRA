@@ -19,6 +19,7 @@ var pageMetaData = require('*/cartridge/scripts/middleware/pageMetaData');
  * @function
  * @memberof Home
  * @param {middleware} - consentTracking.consent
+ * @param {middleware} - userLoggedIn.validateLoggedIn
  * @param {middleware} - cache.applyDefaultCache
  * @param {category} - non-sensitive
  * @param {renders} - isml
@@ -44,7 +45,8 @@ server.get('Show',
         }
         next();
     }, 
-    pageMetaData.computedPageMetaData);
+    pageMetaData.computedPageMetaData
+);
 
 server.get('ErrorNotFound', function (req, res, next) {
     res.setStatusCode(404);
