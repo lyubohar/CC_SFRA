@@ -1,5 +1,3 @@
 node_modules/
 dw.json
 cartridges/app_storefront_base/cartridge/static/
-cartridges/app_storefront_base/cartridge/static/default/css/homePage.css
-cartridges/app_storefront_base/cartridge/static/default/css/global.css
