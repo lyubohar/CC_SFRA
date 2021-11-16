@@ -1,3 +1,4 @@
 node_modules/
 dw.json
 cartridges/app_storefront_base/cartridge/static/
+.vscode/launch.json
