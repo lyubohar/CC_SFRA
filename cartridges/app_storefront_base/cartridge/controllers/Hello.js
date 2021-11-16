@@ -1,9 +1,9 @@
-// Lyubo test file 
+// Lyubo test file
 
-var server = require('server')
+var server = require('server');
 
 server.get('World', function (req, res, next) {
-    res.json({msg: 'Hello World!'});
+    res.json({ msg: 'Hello World!' });
     next();
 });
 

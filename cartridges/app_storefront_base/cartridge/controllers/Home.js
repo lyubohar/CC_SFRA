@@ -25,10 +25,10 @@ var pageMetaData = require('*/cartridge/scripts/middleware/pageMetaData');
  * @param {renders} - isml
  * @param {serverfunction} - get
  */
-server.get('Show', 
-    consentTracking.consent, 
-    userLoggedIn.validateLoggedIn,    
-    cache.applyDefaultCache, 
+server.get('Show',
+    consentTracking.consent,
+    userLoggedIn.validateLoggedIn,
+    cache.applyDefaultCache,
     function (req, res, next) {
         var Site = require('dw/system/Site');
         var PageMgr = require('dw/experience/PageMgr');
@@ -44,7 +44,7 @@ server.get('Show',
             res.render('home/homePage');
         }
         next();
-    }, 
+    },
     pageMetaData.computedPageMetaData
 );
 
