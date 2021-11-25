@@ -6,6 +6,7 @@
 
 var server = require('server');
 var cache = require('*/cartridge/scripts/middleware/cache');
+var userLoggedIn = require('*/cartridge/scripts/middleware/userLoggedIn');
 var consentTracking = require('*/cartridge/scripts/middleware/consentTracking');
 var pageMetaData = require('*/cartridge/scripts/middleware/pageMetaData');
 
@@ -16,12 +17,13 @@ var pageMetaData = require('*/cartridge/scripts/middleware/pageMetaData');
  * @function
  * @memberof Default
  * @param {middleware} - consentTracking.consent
+ * @param {middleware} - userLoggedIn.validateLoggedIn
  * @param {middleware} - cache.applyDefaultCache
  * @param {category} - non-sensitive
  * @param {renders} - isml
  * @param {serverfunction} - get
  */
-server.get('Start', consentTracking.consent, cache.applyDefaultCache, function (req, res, next) {
+server.get('Start', consentTracking.consent, userLoggedIn.validateLoggedIn, cache.applyDefaultCache, function (req, res, next) {
     var Site = require('dw/system/Site');
     var PageMgr = require('dw/experience/PageMgr');
     var pageMetaHelper = require('*/cartridge/scripts/helpers/pageMetaHelper');
