@@ -5,8 +5,8 @@
  */
 
 var server = require('server');
+server.extend(module.superModule);
 var HookMgr = require('dw/system/HookMgr')
-server.extend(module.Supermodule);
 
 /**
  * Extended Home-Show : This endpoint is called when a shopper navigates to the home page
@@ -19,22 +19,24 @@ server.extend(module.Supermodule);
 
 server.append('Show', function(req, res, next) {
 
-    if (HookMgr.hasHook('app.playground.dummy.hook')) {
-        HookMgr.callHook(
-            'app.playground.test.hook',
-            'dummyHookFunction'
-        );
-    }
-
+// Append inline
     var viewData = res.getViewData();
 
     if (!viewData) {
         next();
     } else {
-        res.json({ another_dummy_key: another_dummy_value });
+        // res.json({ another_dummy_key: another_dummy_value });
         
         res.setViewData(viewData);
         next();
+    }
+
+// Append by hook
+    if (HookMgr.hasHook('app.playground.dummy.hook')) {
+        HookMgr.callHook(
+            'app.playground.test.hook',
+            'dummyHookFunction'
+        );
     }
 })
 

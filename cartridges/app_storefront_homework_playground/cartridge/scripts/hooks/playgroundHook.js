@@ -1,6 +1,8 @@
 'use strict';
 
-// Dummy hook
+/**
+ * Dummy hook
+*/
 
 function dummyHookFunction() { 
     var viewData = res.getViewData();
