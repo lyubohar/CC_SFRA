@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Dummy hook
+ * Dummy hook - invoked by the extended Home-Show endpoint. Extends the view data with a JSON object.
 */
 
 function dummyHookFunction() { 
