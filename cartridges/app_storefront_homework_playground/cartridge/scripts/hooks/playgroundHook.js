@@ -10,7 +10,7 @@ function dummyHookFunction() {
     if (!viewData) {
         next();
     } else {
-        res.json({ some_dummy_key: some_dummy_value });
+        res.json({ some_dummy_key: 'some_dummy_value' });
     
         res.setViewData(viewData);
         next();
