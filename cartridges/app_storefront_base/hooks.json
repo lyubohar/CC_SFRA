@@ -21,13 +21,21 @@
             "script": "./cartridge/scripts/hooks/payment/processor/basic_credit"
         },
         {
+            "name": "app.payment.processor.lyubo_test",
+            "script": "./cartridge/scripts/hooks/payment/processor/lyubo_test"
+        },         
+        {
             "name": "app.payment.form.processor.basic_credit",
             "script": "./cartridge/scripts/hooks/payment/processor/basic_credit_form_processor"
-        },
+        },       
         {
             "name": "app.payment.form.processor.default_form_processor",
             "script": "./cartridge/scripts/hooks/payment/processor/default_form_processor"
         },
+        {
+            "name": "app.payment.form.processor.lyubo_test",
+            "script": "./cartridge/scripts/hooks/payment/processor/lyubo_test_form_processor"
+        },         
         {
             "name": "app.experience.editmode",
             "script": "./cartridge/experience/hooks.js"
