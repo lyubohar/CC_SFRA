@@ -1,7 +1,8 @@
 <isloop items="${pdict.order.billing.payment.applicablePaymentMethods}" var="paymentOption">
     <isif condition="${paymentOption.ID === 'CREDIT_CARD'}">
         <isinclude template="checkout/billing/paymentOptions/creditCardTab" />
-        <iscomment> <iselse/>
-            <isprint value="${paymentOption.ID}" /> </iscomment>
+        <iselse/>
+            <isprint value="${paymentOption.ID}" /> 
+            <iscomment> трябва да се инклудне темплейт за моя пеймънт метод, но понеже такъв нямаме, показвам само името на метода за тест </iscomment>
     </isif>
 </isloop>

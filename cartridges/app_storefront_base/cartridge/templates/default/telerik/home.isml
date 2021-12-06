@@ -2,8 +2,7 @@
 
 <isdecorate template="common/layout/page">  
 
-<p>Hello <isprint value="${pdict.welcomeMsg}"/></p>
-<iscomment> ${pdict.welcomeMsg} - shorthand </iscomment>
+<p>Hello <isprint value="${pdict.welcomeMsg}"/></p> <iscomment> ${pdict.welcomeMsg} - shorthand </iscomment>
 
 <isscript>
     var items = ['one', 'two', 'three'];
@@ -11,18 +10,20 @@
 
 <isloop items="${items}" var="subItem" status="index">
 
-    <isif condition="${index.first}">
-        <p data-url="{URLUtils.url('Product-Show')}"><strong>${subItem}</strong></p>
+    <isif condition="${index.index==1}">
+        <p><strong>${subItem}</strong></p>
     <iselse/>
         <p>${subItem}</p>
     </isif>
 
 </isloop>
 
-<isset name="changeScope" value="1" scope="pdict" />
+<isset name="changeScope" value="1" scope="pdict" /> 
+<iscomment> по този начин в декратора (page.isml) ако сложим isif condition="${pdict.changeScope!=1}" и вътре примерно <isinclude template="/components/footer.pageFooter" можем да кажем на страницата home.isml да няма footer, но само тук. </iscomment>
 
 <isprint value="${new Date().toLocaleString()}" encoding="on" />
 
 <isinclude url="${URLUtils.url('Telerik-Include')}" />
+<iscomment> remote include-ва се от include.isml и се сетва в рекуест в Telerik.js </iscomment>
 
 </isdecorate>

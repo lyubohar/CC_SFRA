@@ -25,7 +25,7 @@ var pageMetaData = require('*/cartridge/scripts/middleware/pageMetaData');
  */
 server.get('Show', 
     consentTracking.consent, 
-    cache.applyDefaultCache, 
+    cache.applyDefaultCache, // казва да се взима от кеша за всеки следващ рикуест. позволява различни страници да имат различна стратегия са кеширане
     function (req, res, next) {
         var Site = require('dw/system/Site');
         var PageMgr = require('dw/experience/PageMgr');
@@ -43,7 +43,14 @@ server.get('Show',
             });
         }
         next();
-    }, 
-    pageMetaData.computedPageMetaData);
+}, pageMetaData.computedPageMetaData);
+
+server.get('Include', server.middleware.include, function (req, res, next) {
+    var Site = require('dw/system/Site');
+    res.render('telerik/include', {
+        welcomeMsg: 'Welcome user'
+    });
+    next();
+}, pageMetaData.computedPageMetaData);
 
 module.exports = server.exports();
