@@ -5,6 +5,11 @@
  */
 
 var server = require('server');
+var CustomerMgr = require('dw/customer/CustomerMgr');
+var QueryString = !empty(CurrentRequest.httpQueryString) ? ('?' + CurrentRequest.httpQueryString) : ''
+var Location = 'https://' + (CurrentRequest.httpHost || '') + (CurrentRequest.httpPath || '') + QueryString
+var format = CurrentHttpParameterMap.format.stringValue || ""
+var nodecorator = true
 
 /**
  * Error-Start : Called by the system when an error was not handled locally (general error page).
@@ -23,20 +28,21 @@ var server = require('server');
 
 server.use('Start', function (req, res, next) {
     if (ErrorText == 'Secure connection required for this request.' && !CurrentRequest.httpSecure && (CurrentRequest.httpHeaders.containsKey("x-is-request_method")) && (CurrentRequest.httpHeaders["x-is-request_method"] == 'GET')) {
-        var QueryString = !empty(CurrentRequest.httpQueryString) ? ('?' + CurrentRequest.httpQueryString) : ''
-        var Location = 'https://' + (CurrentRequest.httpHost || '') + (CurrentRequest.httpPath || '') + QueryString
 
         res.render('util/redirect');
+
     } else {
         if (CurrentRequest.getHttpHeaders().get("x-requested-with") != null && CurrentRequest.getHttpHeaders().get("x-requested-with") === "XMLHttpRequest") {
-            var format = CurrentHttpParameterMap.format.stringValue || ""
-            var nodecorator = true
 
             if (format === "json") {
+
                 res.render('error/generalerrorjson');
+
             }
         } else {
+
             res.render('error/generalerror');
+            
         }
     }
 
@@ -53,8 +59,6 @@ server.use('Start', function (req, res, next) {
  */
 
 server.use('Forbidden', function (req, res, next) {
-    var CustomerMgr = require('dw/customer/CustomerMgr');
-
     CustomerMgr.logoutCustomer(true);
     res.render('error/forbidden');
     next();
