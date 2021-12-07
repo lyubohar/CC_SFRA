@@ -3,6 +3,9 @@
 <iselse>
     <isset name="decorator" value="common/layout/page" scope="page" />
 </isif>
+<iscomment> позволява да се ползва различен темплейт според ?format=ajax в URL бара </iscomment>
+
+<iscomment> <isset name="decorator" value="common/layout/blank" scope="page" /> </iscomment>
 
 <isdecorate template="${decorator}">
     <isset name="resultsCount" value="${pdict.searchResults.count}" scope="page" />
@@ -17,6 +20,9 @@
                 <div class="row">
             </isif>
                     <isset name="product" value="${productHit.getProduct()}" scope="page" />
+
+                    <iscomment> <isinclude url="${URLUtils.url('Tile-Show', 'pid', product.ID, 'swatches', true, 'ratings', true)}" /> </iscomment><iscomment> remote include-ваме дифолтния tile темплейт на продуктите; трябва да се акоментира anchor-а долу преди да се ползва </iscomment>
+                    
                     <a href="${URLUtils.utl("Product-Show", "pid", product.ID)}" class="col-md-4 text-center mb-5">
                         <div>${product.name}</div>
                         <div><img src="${product.getImage('small').httpURL}" alt="${product.getImage('small').alt}" /></div>
