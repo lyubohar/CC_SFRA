@@ -2,19 +2,16 @@
 
 /**
  * Dummy hook - invoked by the extended Home-Show endpoint. Extends the view data with a JSON object.
+ * @param {Object} req - Request object
+ * @param {Object} res - Response object
+ * @param {Function} next - Next call in the middleware chain
 */
 
 function dummyHookFunction() { 
-    var viewData = res.getViewData();
-
-    if (!viewData) {
-        next();
-    } else {
-        res.json({ some_dummy_key: 'some_dummy_value' });
-    
-        res.setViewData(viewData);
-        next();
-    }
+    var simpleObject = {
+        some_dummy_key2 : 'Lyubo append hook test'
+    } 
+    return simpleObject
 }
 
 exports.dummyHookFunction = dummyHookFunction;
