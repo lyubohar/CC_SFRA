@@ -53,4 +53,29 @@ server.get('Include', server.middleware.include, function (req, res, next) {
     next();
 }, pageMetaData.computedPageMetaData);
 
+server.get('List', function (req, res, next) {
+    var ProductSearchModel = require('dw/catalog/ProductSearchModel');
+    var results = new ProductSearchModel();
+    var query = req.httpParameterMap.query;
+    results.setSearchPhrase(query);
+    results.search();
+    res.render('telerik/searchResults', {
+        searchResults : results,
+        query : query,
+        format : req.httpParameterMap.format
+    });
+    next();
+}, pageMetaData.computedPageMetaData);
+
+server.get('ShowContent', function (req, res, next) {
+    var ContentMgr = require('dw/content/ContentMgr');
+    var cid = req.httpParameterMap.cid;
+    var content = ContentMgr.getContent(cid);
+    res.render('telerik/contentAsset', {
+        content : content,
+        cid : cid
+    });
+    next();
+}, pageMetaData.computedPageMetaData);
+
 module.exports = server.exports();

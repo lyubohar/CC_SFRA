@@ -1,0 +1,5 @@
+<isdecorate template="common/layout/page">
+    <isif condition="${!empty(content) && pdict.content.online}">
+        <isprint value="${dw.util.StringUtils.format(pdict.content.custom.body.markup, 'Emil')}" encoding="off" />        
+    </isif>
+</isdecorate>
