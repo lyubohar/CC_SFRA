@@ -20,25 +20,22 @@ var HookMgr = require('dw/system/HookMgr');
 
 server.append('Show', function(req, res, next) {
 
-    // Append inline
     var viewData = res.getViewData();
-
+    
+    // Append inline
     if (!viewData) {
         next();
     } else {
-        // res.json({ some_dummy_key: 'some_dummy_value' });
-        
-        res.setViewData(viewData);
-        next();
+        viewData.some_dummy_key = 'Lyubo append inline test'
     }
 
     // Append by hook
     if (HookMgr.hasHook('app.playground.dummy.hook')) {
-        HookMgr.callHook(
-            'app.playground.test.hook',
-            'dummyHookFunction'
-        );
+        viewData = HookMgr.callHook('app.playground.dummy.hook', 'dummyHookFunction');       
     }
-})
+
+    res.setViewData(viewData);
+    next();
+});
 
 module.exports = server.exports();
