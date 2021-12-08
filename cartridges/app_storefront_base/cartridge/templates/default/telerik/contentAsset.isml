@@ -1,5 +1,17 @@
 <isdecorate template="common/layout/page">
-    <isif condition="${!empty(content) && pdict.content.online}">
-        <isprint value="${dw.util.StringUtils.format(pdict.content.custom.body.markup, 'Emil')}" encoding="off" />        
+
+    Properties usage (msg vs msgf): <fieldset>
+        ${Resource.msg('label.welcome_test', 'account', null)}
+        <br />
+        ${Resource.msgf('label.welcome_test', 'account', null, 'Lyubo')}
+        <iscomment> четем хардкоднат текст, примерно от account.properties файла. първото е името на пропъртито във файла, второто е името на файла, третото е дифолтна стойност. В msgf последното е променливата вместо placeholder-а {0} </iscomment>
+    </fieldset>
+
+    <br />
+    <br />
+
+    <isif condition="${!empty(pdict.content) && pdict.content.online}">
+        <isprint value="${pdict.content.custom.body}" encoding="off" />        
     </isif>
+
 </isdecorate>
