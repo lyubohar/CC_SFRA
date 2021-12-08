@@ -11,7 +11,8 @@
     <br />
 
     <isif condition="${!empty(pdict.content) && pdict.content.online}">
-        <isprint value="${pdict.content.custom.body}" encoding="off" />        
+        <isprint value="${pdict.content.custom.body}" encoding="off" />  
+        <iscomment> вземи от къстъм контент асет от боди полето (ако има такъв и ако е онлайн) </iscomment>      
     </isif>
 
 </isdecorate>
