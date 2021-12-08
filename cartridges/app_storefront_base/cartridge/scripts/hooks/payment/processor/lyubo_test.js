@@ -141,11 +141,12 @@ function Handle(basket, paymentInformation, paymentMethodID, req) {
  * @return {Object} returns an error object
  */
 function Authorize(orderNumber, paymentInstrument, paymentProcessor) {
+    var OrderMgr = require('dw/order/OrderMgr')
     var serverErrors = [];
     var fieldErrors = {};
     var error = false;
     var allowedEmail = 'lyubohar@gmail.com';
-    var currentEmail = customer.profile.email;
+    var currentEmail = OrderMgr.getOrder(orderNumber).customerEmail;
 
     if (allowedEmail == currentEmail) {
         try {
