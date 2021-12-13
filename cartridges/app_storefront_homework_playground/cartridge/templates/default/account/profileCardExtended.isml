@@ -1,0 +1,10 @@
+<!---Extend profileCard.isml with 'Interests' and 'Country of residence' fields--->
+
+<dl>
+    <dt>${Resource.msg('label.profile.interests','account',null)}</dt>
+    <dd>${customer.profile.custom.interests}</dd>
+</dl>
+<dl>
+    <dt>${Resource.msg('label.profile.countryResidence','account',null)}</dt>
+    <dd>${customer.profile.custom.countryResidence.displayValue;}</dd>
+</dl>
