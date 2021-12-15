@@ -5,7 +5,8 @@
     <label class="form-control-label" for="interests">
         <isprint value="${pdict.profileForm.customer.interests.label}" encoding="htmlcontent" />
     </label>
-    <textarea type="text" class="form-control resize-disabled" id="interests" rows="2" maxlength="100"><isprint value="${pdict.profileForm.customer.interests.value}" encoding="off" /></textarea>
+    <input type="text" class="form-control" id="interests"
+        <isprint value="${pdict.profileForm.customer.interests.attributes}" encoding="off" />>
     <div class="invalid-feedback"></div>
 </div>    
 

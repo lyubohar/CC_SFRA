@@ -61,7 +61,7 @@
 			max-length="100"
 			missing-error="error.message.required" 
 			range-error="error.message.50orless" 
-			type="string" />
+			type="string"/>
 
 		<field 
 			formid="countryResidence" 
