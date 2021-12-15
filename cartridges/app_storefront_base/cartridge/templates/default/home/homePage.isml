@@ -9,15 +9,12 @@
     <div class="home-main homepage">
         <isslot id="home-main-m" description="Main home page slot." context="global" />
     </div>
-
-    <div>${pdict.some_dummy_key}</div>
-    <div>${pdict.some_dummy_key2}</div>
-
+    
     <div class="container home-product-tiles homepage">
         <div class="hp-product-grid" itemtype="http://schema.org/SomeProducts" itemid="#product">
             <isslot id="_home-main-lyubo-slot" description="Homework/playground slot." context="global" />
         </div>     
-    </div>    
+    </div>   
 
     <div class="container home-product-tiles homepage">
         <div class="hp-product-grid" itemtype="http://schema.org/SomeProducts" itemid="#product">
@@ -37,6 +34,8 @@
         </div>     
     </div>
 
+    <isinclude url="${URLUtils.url('Swapi-Swapi')}" />
+
     <div class="container home-categories homepage">
         <div class="row home-main-categories no-gutters">            
             <isslot id="home-categories-m" description="Categories slots on the home page." context="global" />
@@ -48,6 +47,9 @@
             <isslot id="home-products-m" description="Product tiles on the home page." context="global" />
         </div>
     </div>
+
+    <div>${pdict.some_dummy_key}</div>
+    <div>${pdict.some_dummy_key2}</div>
 
     <div class="homepage shop-the-style">
         <isslot id="home-product-set-m" description="Link to a Product Set." context="global" />

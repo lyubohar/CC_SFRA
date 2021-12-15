@@ -160,3 +160,16 @@
         color: $white;
     }
 }
+
+// Homework temp styles 
+
+.swapi-homework {
+    background-color: beige;
+    max-width: calc(100% - 175px);
+    padding: 20px;
+    position: absolute;
+    z-index: 9999;
+    top: 180px;
+    right: 50px;
+    width: 500px;
+}
