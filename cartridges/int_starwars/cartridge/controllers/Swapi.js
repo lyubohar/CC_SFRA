@@ -22,7 +22,7 @@ server.get(
             name : deathStar.name,
             manufacturer : deathStar.manufacturer,
             classification : deathStar.starship_class,
-            cost : deathStar.msg
+            cost : deathStar.cost_in_credits
         });
         next();
     }

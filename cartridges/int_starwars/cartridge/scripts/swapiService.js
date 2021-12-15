@@ -18,9 +18,9 @@ function getDeathStar() {
         parseResponse: function(svc, client) {
             return client.text;
         },
-
+       
         filterLogMessage: function(msg) {
-            return msg.replace("cost_in_credits", "$$$$$$$$$$$$$$$$$$$");
+            return msg.replace(cost_in_credits, "$$$$$$$$$$$$$$$$$$$");
         }
     });
 
