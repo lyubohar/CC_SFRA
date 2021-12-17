@@ -117,10 +117,10 @@ server.append(
 
                 if (customerLogin) {
                     Transaction.wrap(function () {
-                        // profile.setFirstName(formInfo.firstName);
-                        // profile.setLastName(formInfo.lastName);
-                        // profile.setEmail(formInfo.email);
-                        // profile.setPhoneHome(formInfo.phone);
+                        profile.setFirstName(formInfo.firstName);
+                        profile.setLastName(formInfo.lastName);
+                        profile.setEmail(formInfo.email);
+                        profile.setPhoneHome(formInfo.phone);
                         profile.custom.interests = formInfo.interests;
                         profile.custom.countryResidence = formInfo.countryResidence;
                     });
