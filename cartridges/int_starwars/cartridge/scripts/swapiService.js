@@ -1,10 +1,9 @@
 'use strict';
 
 /**
- * 
- * 
- * 
- */
+ * Handles swapi service. Sends request, gets response and filters the response.
+ * @returns {String} - returns string with data from Star Wars API to be used by controller.
+*/
 
 function getDeathStar() {
     
@@ -13,15 +12,17 @@ function getDeathStar() {
 
         createRequest: function(svc, args) {
             svc.setRequestMethod('GET');
+            // return args;
         },
 
         parseResponse: function(svc, client) {
             return client.text;
         },
-       
+
         filterLogMessage: function(msg) {
-            return msg.replace(cost_in_credits, "$$$$$$$$$$$$$$$$$$$");
+            return msg.replace("cost_in_credits", "test");
         }
+
     });
 
     var response = getStarWarsService.call().object;
@@ -30,6 +31,4 @@ function getDeathStar() {
 
 };
 
-module.exports = {
-    getDeathStar : getDeathStar
-};
+exports.getDeathStar = getDeathStar;

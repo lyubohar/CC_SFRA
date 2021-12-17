@@ -34,7 +34,7 @@
         </div>     
     </div>
 
-    <isinclude url="${URLUtils.url('Swapi-Swapi')}" />
+    <isinclude url="${URLUtils.url('Tips-Show')}" />
 
     <div class="container home-categories homepage">
         <div class="row home-main-categories no-gutters">            
