@@ -55,6 +55,7 @@ server.post(
             firstName: profileForm.customer.firstname.value,
             lastName: profileForm.customer.lastname.value,
             email: profileForm.customer.email.value,
+            gender: profileForm.customer.gender.value,
             profileForm: profileForm
         }; 
                
@@ -72,6 +73,7 @@ server.post(
                     newsletter.custom.firstName = formInfo.firstName;
                     newsletter.custom.lastName = formInfo.lastName;
                     newsletter.custom.email = formInfo.email;
+                    newsletter.custom.gender = formInfo.gender;
                 });
             } catch (error) {
                 error = true;
