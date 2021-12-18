@@ -10,18 +10,18 @@ var CustomObjectMgr = require('dw/object/CustomObjectMgr');
 var UUIDUtils = require('dw/util/UUIDUtils');
 
 /**
- * Create custom object
- * @name Playground/Subscribe-Create
+ * Show form
+ * @name Playground/Subscribe-Show
  * @function
  * @memberof Home
  * @param {category} - non-sensitive
- * @param {serverfunction} - append
+ * @param {serverfunction} - get
 */
 
 server.get('Show', 
     function (req, res, next) {
 
-        var profileForm = server.forms.getForm('profile');
+        var profileForm = server.forms.getForm('newsletter');
 
         res.render('home/subscribe', {
             profileForm: profileForm
@@ -44,14 +44,14 @@ server.post(
     server.middleware.https, 
     function (req, res, next) {
 
-        var profileForm = server.forms.getForm('profile');
+        var profileForm = server.forms.getForm('newsletter');
         var error = false;
 
         if(!profileForm){
             error = true;
         };
 
-        var result = {                                           //constructs an object containing the form result
+        var result = {                                   //constructs an object containing the form result
             firstName: profileForm.customer.firstname.value,
             lastName: profileForm.customer.lastname.value,
             email: profileForm.customer.email.value,
@@ -61,7 +61,7 @@ server.post(
         res.setViewData(result);                         // adds form result to the ViewData object
 
         this.on('route:BeforeComplete', function (req, res) {
-            var formInfo = res.getViewData();
+            var formInfo = res.getViewData();           // creates object with data to save
         
             var type = 'NewsletterRegHW';
             var keyValue = UUIDUtils.createUUID();
@@ -82,11 +82,11 @@ server.post(
                     error: true
                 });
             } else {
-                // res.render('home/subscribe-success');
-                res.json({
-                    error: false,
-                    id: keyValue
-                });
+                res.render('home/subscribe-success');
+                // res.json({
+                //     error: false,
+                //     id: keyValue
+                // });
             };
         });        
 

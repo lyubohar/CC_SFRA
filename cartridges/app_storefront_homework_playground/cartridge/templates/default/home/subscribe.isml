@@ -3,7 +3,6 @@
         var assets = require('*/cartridge/scripts/assets.js');
         assets.addJs('/js/productTile.js');
         assets.addCss('/css/homePage.css');
-        var profileForm = server.forms.getForm('profile');
     </isscript>
 
     <div class="home-main homepage">
@@ -43,21 +42,6 @@
                         <isprint value="${pdict.profileForm.customer.email.attributes}" encoding="off" />>
                     <div class="invalid-feedback"></div>
                 </div>   
-                <iscomment> <input type="hidden" name="${pdict.csrf.tokenName}" value="${pdict.csrf.token}"/>
-                <div class="row">
-                    <div class="col form-group">
-                        <span class="${pdict.tracking_consent == null ? '' : 'consented' } tracking-consent"
-                            data-url="${URLUtils.url('ConsentTracking-GetContent', 'cid', 'tracking_hint')}"
-                            data-reject="${URLUtils.url('ConsentTracking-SetSession', 'consent', 'false')}"
-                            data-accept="${URLUtils.url('ConsentTracking-SetSession', 'consent', 'true')}"
-                            data-acceptText="${Resource.msg('button.consentTracking.yes', 'common', null)}"
-                            data-rejectText="${Resource.msg('button.consentTracking.no', 'common', null)}"
-                            data-heading="${Resource.msg('heading.consentTracking.track.consent', 'common', null)}"
-                        >
-                            ${Resource.msg('link.tracking.consent','account',null)}
-                        </span>
-                    </div>
-                </div> </iscomment>
                 <div class="row">
                     <div class="col">
                         <a href="${URLUtils.url('Home-Show')}" class="btn btn-block btn-outline-primary">${Resource.msg('button.cancel','account',null)}</a>
