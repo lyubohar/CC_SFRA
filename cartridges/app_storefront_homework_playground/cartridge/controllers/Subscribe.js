@@ -85,10 +85,6 @@ server.post(
                 });
             } else {
                 res.render('home/subscribe-success');
-                // res.json({
-                //     error: false,
-                //     id: keyValue
-                // });
             };
         });        
 
