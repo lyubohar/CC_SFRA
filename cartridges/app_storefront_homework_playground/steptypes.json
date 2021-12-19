@@ -1,0 +1,17 @@
+{
+    "step-types": {
+        "script-module-step":
+        [
+            {
+                "@type-id":"custom.ExportNewsletterRegHWStep",
+                "description":"Export custom objects",
+                "module":"app_storefront_homework_playground/cartridge/scripts/steps/ExportNewsletterRegHW" 
+            },
+            {
+                "@type-id":"custom.DeleteNewsletterRegHWStep",
+                "description":"Delete custom objects",
+                "module":"app_storefront_homework_playground/cartridge/scripts/steps/DeleteNewsletterRegHW" 
+            }            
+        ]
+    }
+}

@@ -39,8 +39,7 @@ server.get('Show',
  * @param {serverfunction} - append
 */
 
-server.post(
-    'Create', 
+server.post('Create', 
     server.middleware.https, 
     function (req, res, next) {
 
@@ -58,35 +57,31 @@ server.post(
             gender: profileForm.customer.gender.value,
             profileForm: profileForm
         }; 
-               
         res.setViewData(result);                         // adds form result to the ViewData object
+        var formInfo = res.getViewData();                // creates object with data to save
+    
+        try {
+            Transaction.wrap(function() {
+                var type = 'NewsletterRegHW';
+                var keyValue = UUIDUtils.createUUID();
+                var newsletter = CustomObjectMgr.createCustomObject(type, keyValue);
 
-        this.on('route:BeforeComplete', function (req, res) {
-            var formInfo = res.getViewData();           // creates object with data to save
-        
-            var type = 'NewsletterRegHW';
-            var keyValue = UUIDUtils.createUUID();
-    
-            try {
-                Transaction.wrap(function() {
-                    var newsletter = CustomObjectMgr.createCustomObject(type, keyValue);
-                    newsletter.custom.firstName = formInfo.firstName;
-                    newsletter.custom.lastName = formInfo.lastName;
-                    newsletter.custom.email = formInfo.email;
-                    newsletter.custom.gender = formInfo.gender;
-                });
-            } catch (error) {
-                error = true;
-            };
-    
-            if (error) {
-                res.json({
-                    error: true
-                });
-            } else {
-                res.render('home/subscribe-success');
-            };
-        });        
+                newsletter.custom.firstName = formInfo.firstName;
+                newsletter.custom.lastName = formInfo.lastName;
+                newsletter.custom.email = formInfo.email;
+                newsletter.custom.gender = formInfo.gender;
+            });
+        } catch (error) {
+            error = true;
+        };
+
+        if (error) {
+            res.json({
+                error: true
+            });
+        } else {
+            res.render('home/subscribe-success');
+        };       
 
         return next();
 });
