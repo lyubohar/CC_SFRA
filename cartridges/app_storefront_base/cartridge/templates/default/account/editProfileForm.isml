@@ -30,6 +30,9 @@
         <div class="invalid-feedback"></div>
     </div>
 
+    <!---Extend with 'Interests' and 'Country of residence' fields--->
+    <isinclude template="account/editProfileFormExtended" />
+
     <div class="form-group
         <isif condition="${pdict.profileForm.customer.email.mandatory === true}">required</isif>">
         <label class="form-control-label" for="email">

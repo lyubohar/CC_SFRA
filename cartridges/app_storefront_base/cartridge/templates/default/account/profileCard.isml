@@ -25,5 +25,8 @@
             </dl>
         </isif>
 
+        <!---Extend with 'Interests' and 'Country of residence' fields--->
+        <isinclude template="account/profileCardExtended" />
+        
     </div>
 </div>
