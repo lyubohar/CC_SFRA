@@ -12,7 +12,7 @@ function getDeathStar() {
 
         createRequest: function(svc, args) {
             svc.setRequestMethod('GET');
-            // return args;
+            return args;
         },
 
         parseResponse: function(svc, client) {
@@ -20,7 +20,7 @@ function getDeathStar() {
         },
 
         filterLogMessage: function(msg) {
-            return msg.replace("cost_in_credits", "test");
+            return msg.replace(cost_in_credits.value, "test");
         }
 
     });
