@@ -1,12 +1,14 @@
+// Export newsletter objects job step
+
 var CustomObjectMgr = require('dw/object/CustomObjectMgr');
 var { File, FileWriter, XMLStreamWriter } = require('dw/io');
 
 module.exports.execute = function () {
     var exportObjectIterate = CustomObjectMgr.getAllCustomObjects('NewsletterRegHW');
-
     var file = new File([File.IMPEX, 'exported-files', 'ExportedNewsletterReg.xml'].join(File.SEPARATOR));
     var fileWriter = new FileWriter(file);
     var xsw = new XMLStreamWriter(fileWriter);
+    var error = false;
 
     try {
         xsw.writeStartDocument();
@@ -25,7 +27,7 @@ module.exports.execute = function () {
 
         xsw.writeEndElement();
     } catch (error) {
-        
+        error = true;
     } finally {
         xsw.close();        
         fileWriter.close();

@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * @namespace Home
-*/
+ * @namespace Subscribe
+ */
 
 var server = require('server');
 var Transaction = require('dw/system/Transaction');
@@ -10,13 +10,13 @@ var CustomObjectMgr = require('dw/object/CustomObjectMgr');
 var UUIDUtils = require('dw/util/UUIDUtils');
 
 /**
- * Show form
+ * Subscribe-Show - The Subscribe-Show renders the template with Newsletter Subscription form and allows the user to subscribe by filling the form.
  * @name Playground/Subscribe-Show
  * @function
- * @memberof Home
+ * @memberof Subscribe
  * @param {category} - non-sensitive
  * @param {serverfunction} - get
-*/
+ */
 
 server.get('Show', 
     function (req, res, next) {
@@ -26,18 +26,19 @@ server.get('Show',
         res.render('home/subscribe', {
             profileForm: profileForm
         });
+
         next();
     }
 );
 
 /**
- * Create custom object
+ * Subscribe-Create - On form save creates custom objects (based on predefined custom object type) and fills them with data, provided by user. Renders the subscribe-success ISML template.
  * @name Playground/Subscribe-Create
  * @function
- * @memberof Home
+ * @memberof Subscribe
  * @param {category} - non-sensitive
- * @param {serverfunction} - append
-*/
+ * @param {serverfunction} - post
+ */
 
 server.post('Create', 
     server.middleware.https, 
