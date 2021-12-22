@@ -3,6 +3,7 @@
         ${Resource.msg('label.availability', 'common', null)}:
     </span>
 </div>
+
 <div class="col-8">
     <ul class="list-unstyled availability-msg">
         <li>
@@ -17,13 +18,56 @@
         <li>
             <isif condition="${!product.available}">
                 <button class="btn btn-outline-primary mt-1"
-                    data-toggle="modal" data-target="#editProductModal"
-                    data-pid="${product.id}">
+                    data-toggle="modal" 
+                    data-target="#notifyWhenBackModal"
                     <i class="fa fa-bell"></i>
                     ${Resource.msg('button.notifyWhenBack', 'common', null)}
-                </button>  
+                </button> 
             </isif>
         </li>
     </ul>
 </div>
 
+
+<!-- Modal -->
+<div class="modal fade" id="notifyWhenBackModal" tabindex="-1" role="dialog" aria-labelledby="notifyWhenBackModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title request-password-title">${Resource.msg('label.notifyWhenBack.heading', 'common', null)}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+
+            <div class="modal-body">
+                <form class="notify-when-back-form" action="${URLUtils.url('Account-PasswordResetDialogForm', 'mobile', pdict.mobile)}" method="POST" name="email-form" id="email-form">
+                    <div class="notify-when-back-body">
+                        <div class="form-group">
+                            <input type="text" value="${product.id}">
+                        </div>                        
+                        <div class="form-group required">
+                            <label class="form-control-label" for="phone">
+                                <isprint value="${Resource.msg('label.profile.phone', 'account', null)}" encoding="htmlcontent" />
+                            </label>
+                            <input
+                                id="phone"
+                                type="text"
+                                class="form-control"
+                                name="phone"
+                                aria-describedby="phoneHelp"
+                                placeholder="">
+                            <div class="invalid-feedback"></div>
+                        </div>  
+                    </div>
+                    <div class="send-email-btn">
+                        <button
+                            type="submit"
+                            id="submitEmailButton"
+                            class="btn btn-primary btn-block">
+                            ${Resource.msg('button.send','login',null)}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
