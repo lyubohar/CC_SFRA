@@ -28,13 +28,18 @@
     </ul>
 </div>
 
-
 <!-- Modal -->
 <div class="modal fade" id="notifyWhenBackModal" tabindex="-1" role="dialog" aria-labelledby="notifyWhenBackModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title notify-when-back-title">${Resource.msg('label.notifyWhenBack.heading', 'common', null)}</h2>
+                <isscript>
+                    var ContentMgr = require('dw/content/ContentMgr');
+                    var notifyWhenBackTitle = ContentMgr.getContent('notify-when-back-title');
+                </isscript> 
+                <isif condition="${!empty(notifyWhenBackTitle) && notifyWhenBackTitle.isOnline()}">
+                    <isprint value="${notifyWhenBackTitle.custom.body}" encoding="off" />
+                </isif>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
 
