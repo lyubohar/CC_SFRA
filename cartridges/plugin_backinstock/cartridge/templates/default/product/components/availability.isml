@@ -1,3 +1,8 @@
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    assets.addJs('/js/notifyWhenInStock.js');
+</isscript>
+
 <div class="col-4">
     <span class="availability non-input-label">
         ${Resource.msg('label.availability', 'common', null)}:
@@ -19,7 +24,7 @@
             <isif condition="${!product.available}">
                 <button class="btn btn-outline-primary mt-1"
                     data-toggle="modal" 
-                    data-target="#notifyWhenBackModal"
+                    data-target="#notifyWhenInStock"
                     <i class="fa fa-bell"></i>
                     ${Resource.msg('button.notifyWhenBack', 'common', null)}
                 </button> 
@@ -29,7 +34,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="notifyWhenBackModal" tabindex="-1" role="dialog" aria-labelledby="notifyWhenBackModalLabel" aria-hidden="true">
+<div class="modal fade" id="notifyWhenInStock" tabindex="-1" role="dialog" aria-labelledby="notifyWhenInStockLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -44,10 +49,10 @@
             </div>
 
             <div class="modal-body">
-                <form class="notify-when-back-form" action="${URLUtils.url('Account-PasswordResetDialogForm', 'mobile', pdict.mobile)}" method="POST" name="email-form" id="email-form">
+                <form class="notify-me" action="${URLUtils.url('Twilio-Subscribe')}" method="POST" name="notify-me">
                     <div class="notify-when-back-body">
                         <div class="form-group">
-                            <input type="text" value="${product.id}">
+                            <input type="text" value="${product.id}" name="notifyProductId">
                         </div>                        
                         <div class="form-group required">
                             <label class="form-control-label" for="phone">
@@ -57,7 +62,7 @@
                                 id="phone"
                                 type="text"
                                 class="form-control"
-                                name="phone"
+                                name="notifyPhone"
                                 aria-describedby="phoneHelp"
                                 placeholder="ex. 00359888888888">
                             <div class="invalid-feedback"></div>
@@ -66,8 +71,9 @@
                     <div class="send-email-btn">
                         <button
                             type="submit"
-                            id="submitEmailButton"
-                            class="btn btn-primary btn-block">
+                            name="submit" 
+                            value="submit" 
+                            class="btn btn-primary btn-block submit-notify-me">
                             ${Resource.msg('button.send','login',null)}
                         </button>
                     </div>
