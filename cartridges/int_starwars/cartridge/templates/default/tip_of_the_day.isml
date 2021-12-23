@@ -3,5 +3,4 @@
 <div class="container swapi-homework">
     <h2 class="text-center"><strong>Star Wars tip of the day:</strong></h2>
     <h2 class="text-center">${pdict.name}, ${pdict.manufacturer}, ${pdict.classification}</h2>
-    <h2 class="text-center">Cost in credits: ${pdict.cost}</h2>
 </div>

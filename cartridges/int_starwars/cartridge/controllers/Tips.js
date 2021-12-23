@@ -29,8 +29,7 @@ server.get(
         res.render('tip_of_the_day', {
             name : deathStar.name,
             manufacturer : deathStar.manufacturer,
-            classification : deathStar.starship_class,
-            cost : deathStar.cost_in_credits
+            classification : deathStar.starship_class
         });
         next();
     }

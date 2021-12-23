@@ -20,7 +20,7 @@ function getDeathStar() {
         },
 
         filterLogMessage: function(msg) {
-            return msg.replace("/cost_in_credits\: \".*?\"/", "$$$$$$$$$$$$$$$$$$$");
+            return msg.replace(/cost_in_credits:.*?&/, "cost_in_credits:************&");
         }
 
     });
