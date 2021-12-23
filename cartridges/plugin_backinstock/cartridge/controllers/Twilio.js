@@ -25,25 +25,23 @@ server.post('Subscribe',
     server.middleware.https,
     function (req, res, next) {
 
+        var Resource = require('dw/web/Resource');
+
         var ajaxForm = req.form;
         var product = ajaxForm.notifyProductId;
         var phone = ajaxForm.notifyPhone;
 
-        if (!ajaxForm && !product || !product && !phone) {
+        if (!ajaxForm || !product || !phone) {
             res.json({
                 error: true,
-                msg: 'Cannot find form data'
+                msg: Resource.msg('message.notifyWhenBack.error', 'common', null)
             });     
-        } else if (!phone) {
-            res.json({
-                error: true,
-                msg: 'No phone provided'
-            }); 
         } else {
             res.json({
                 success: true,
-                productid: product,
-                phone: phone
+                // productid: product,
+                // phone: phone,
+                msg: Resource.msg('message.notifyWhenBack.success', 'common', null)
             });           
         }
 
