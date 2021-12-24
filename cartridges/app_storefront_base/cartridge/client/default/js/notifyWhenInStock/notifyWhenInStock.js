@@ -3,7 +3,7 @@
 /**
  * Display the returned message.
  * @param {string} data - data returned from the server's ajax call
- * @param {Object} buttonElement - button that was clicked for contact us sign-up
+ * @param {Object} buttonElement - button that was clicked for sign-up
  */
  function displayMessage(data, buttonElement) {
     $.spinner().stop();

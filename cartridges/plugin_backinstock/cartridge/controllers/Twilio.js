@@ -7,16 +7,13 @@
 var server = require('server');
 
 /**
- * Twilio-Subscribe : This endpoint is called to submit the shopper's contact information
- * @name Base/ContactUs-Subscribe
+ * Twilio-Subscribe : This endpoint is called to submit the registration for the Notify When Back In Stock functionality.
+ * @name Base/Twilio-Subscribe
  * @function
- * @memberof ContactUs
+ * @memberof Twilio
  * @param {middleware} - server.middleware.https
- * @param {httpparameter} - contactFirstName - First Name of the shopper
- * @param {httpparameter} - contactLastName - Last Name of the shopper
- * @param {httpparameter} - contactEmail - Email of the shopper
- * @param {httpparameter} - contactTopic - ID of the "Contact Us" topic
- * @param {httpparameter} - contactComment - Comments entered by the shopper
+ * @param {httpparameter} - notifyProductId - Product ID
+ * @param {httpparameter} - notifyPhone - Phone of the shopper
  * @param {category} - sensitive
  * @param {returns} - json
  * @param {serverfunction} - post
