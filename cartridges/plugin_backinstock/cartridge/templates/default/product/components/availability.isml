@@ -1,6 +1,6 @@
 <isscript>
     var assets = require('*/cartridge/scripts/assets.js');
-    assets.addJs('/js/notifyWhenInStock.js');
+    assets.addJs('/js/backInStock.js');
 </isscript>
 
 <div class="col-4">
@@ -24,9 +24,9 @@
             <isif condition="${!product.available}">
                 <button class="btn btn-outline-primary mt-1"
                     data-toggle="modal" 
-                    data-target="#notifyWhenInStock"
+                    data-target="#backInStockModal"
                     <i class="fa fa-bell"></i>
-                    ${Resource.msg('button.notifyWhenBack', 'common', null)}
+                    ${Resource.msg('button.backInStock', 'common', null)}
                 </button> 
             </isif>
         </li>
@@ -34,25 +34,25 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="notifyWhenInStock" tabindex="-1" role="dialog" aria-labelledby="notifyWhenInStockLabel" aria-hidden="true">
+<div class="modal fade" id="backInStockModal" tabindex="-1" role="dialog" aria-labelledby="backInStockLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <isscript>
                     var ContentMgr = require('dw/content/ContentMgr');
-                    var notifyWhenBackTitle = ContentMgr.getContent('notify-when-back-title');
+                    var backInStockTitle = ContentMgr.getContent('back-in-stock-title');
                 </isscript> 
-                <isif condition="${!empty(notifyWhenBackTitle) && notifyWhenBackTitle.isOnline()}">
-                    <isprint value="${notifyWhenBackTitle.custom.body}" encoding="off" />
+                <isif condition="${!empty(backInStockTitle) && backInStockTitle.isOnline()}">
+                    <isprint value="${backInStockTitle.custom.body}" encoding="off" />
                 </isif>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
 
             <div class="modal-body">
-                <form class="notify-me" action="${URLUtils.url('Twilio-Subscribe')}" method="POST" name="notify-me">
-                    <div class="notify-when-back-body">
+                <form class="back-in-stock-form" action="${URLUtils.url('Twilio-Subscribe')}" method="POST">
+                    <div class="back-in-stock-body">
                         <div class="form-group">
-                            <input type="text" value="${product.id}" name="notifyProductId">
+                            <input type="text" value="${product.id}" name="productId">
                         </div>                        
                         <div class="form-group required">
                             <label class="form-control-label" for="phone">
@@ -62,18 +62,18 @@
                                 id="phone"
                                 type="text"
                                 class="form-control"
-                                name="notifyPhone"
+                                name="phone"
                                 aria-describedby="phoneHelp"
                                 placeholder="ex. 00359888888888">
                             <div class="invalid-feedback"></div>
                         </div>  
                     </div>
-                    <div class="send-email-btn">
+                    <div class="back-in-stock-btn">
                         <button
                             type="submit"
                             name="submit" 
                             value="submit" 
-                            class="btn btn-primary btn-block submit-notify-me">
+                            class="btn btn-primary btn-block back-in-stock-submit">
                             ${Resource.msg('button.send','login',null)}
                         </button>
                     </div>

@@ -3,5 +3,5 @@
 var processInclude = require('./util');
 
 $(document).ready(function () {
-    processInclude(require('./notifyWhenInStock/notifyWhenInStock'));
+    processInclude(require('./backInStock/backInStock'));
 });

@@ -25,20 +25,18 @@ server.post('Subscribe',
         var Resource = require('dw/web/Resource');
 
         var ajaxForm = req.form;
-        var product = ajaxForm.notifyProductId;
-        var phone = ajaxForm.notifyPhone;
+        var product = ajaxForm.productId;
+        var phone = ajaxForm.phone;
 
         if (!ajaxForm || !product || !phone) {
             res.json({
                 error: true,
-                msg: Resource.msg('message.notifyWhenBack.error', 'common', null)
+                msg: Resource.msg('message.backInStock.error', 'common', null)
             });     
         } else {
             res.json({
                 success: true,
-                // productid: product,
-                // phone: phone,
-                msg: Resource.msg('message.notifyWhenBack.success', 'common', null)
+                msg: Resource.msg('message.backInStock.success', 'common', null)
             });           
         }
 

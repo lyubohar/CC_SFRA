@@ -14,29 +14,33 @@
         status = 'alert-danger';
     }
 
-    if ($('.back-in-stock-signup-message').length === 0) {
+    if ($('.back-in-stock-message').length === 0) {
         $('.modal .modal-content').append(
-            '<div class="back-in-stock-signup-message"></div>'
+            '<div class="back-in-stock-message"></div>'
         );
     }
-    $('.back-in-stock-signup-message')
-        .append('<div class="back-in-stock-signup-alert text-center ' + status + '" role="alert">' + data.msg + '</div>');
+    $('.back-in-stock-message')
+        .append('<div class="back-in-stock-alert text-center ' + status + '" role="alert">' + data.msg + '</div>');
 
     setTimeout(function () {
-        $('.back-in-stock-signup-message').remove();
+        $('.back-in-stock-message').remove();
         buttonElement.removeAttr('disabled');
     }, 3000);
 }
+
+/**
+ * Ajax call with form data.
+ */
 
 module.exports = {
     notifyWhenInStock: function () {
         
         // ... validation rules come here,
 
-        $('form.notify-me').submit(function (e) {
+        $('form.back-in-stock-form').submit(function (e) {
             e.preventDefault();
             var formElement = $(this);
-            var buttonElement = $('.submit-notify-me');
+            var buttonElement = $('.back-in-stock-submit');
             var url = formElement.attr('action');
 
             $.spinner().start();
@@ -49,7 +53,7 @@ module.exports = {
                 success: function (data) {
                     displayMessage(data, buttonElement);
                     if (data.success) {
-                        $('.notify-me').trigger('reset');
+                        $('.back-in-stock-form').trigger('reset');
                     }
                 },
                 error: function (err) {
