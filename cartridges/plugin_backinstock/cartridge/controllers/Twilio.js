@@ -12,7 +12,7 @@ var server = require('server');
  * @function
  * @memberof Twilio
  * @param {middleware} - server.middleware.https
- * @param {httpparameter} - notifyProductId - Product ID
+ * @param {httpparameter} - notifyProductId - ID of the product
  * @param {httpparameter} - notifyPhone - Phone of the shopper
  * @param {category} - sensitive
  * @param {returns} - json
@@ -21,7 +21,6 @@ var server = require('server');
 server.post('Subscribe', 
     server.middleware.https,
     function (req, res, next) {
-
         var Resource = require('dw/web/Resource');
 
         var ajaxForm = req.form;
