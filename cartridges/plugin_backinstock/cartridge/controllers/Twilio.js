@@ -44,31 +44,15 @@ server.post('Subscribe',
         // Populate custom object
 
         var Transaction = require('dw/system/Transaction');
-        var form = formAjax;
-        var error = false;
-
-        if(!formAjax){
-            error = true;
-        }; 
-
-        var result = {                              //constructs an object containing the form result
-            test1: formProduct,
-            test2: formPhone,
-            form: form
-        }; 
-        res.setViewData(result);                     // adds form result to the ViewData object
-        var formInfo = res.getViewData();            // creates object with data to save
 
         try {
             Transaction.wrap(function() {
                 var CustomObjectMgr = require('dw/object/CustomObjectMgr'); 
-
                 var type = 'NotifyMeBackInStock';
                 var keyValue = formProduct;
                 var backInStockObject = CustomObjectMgr.createCustomObject(type, keyValue);
 
-                // backInStockObject.productId = formInfo.test1;
-                backInStockObject.custom.phoneNumbers = formInfo.test2;
+                backInStockObject.custom.phoneNumbers = formPhone;
             });
         } catch (error) {
             error = true;
