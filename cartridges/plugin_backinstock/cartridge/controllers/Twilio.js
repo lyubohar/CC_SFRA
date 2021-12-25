@@ -22,6 +22,7 @@ server.post('Subscribe',
     server.middleware.https,
     function (req, res, next) {
         var Resource = require('dw/web/Resource');
+        var Transaction = require('dw/system/Transaction');
 
         // Take form values from Ajax
 
@@ -29,11 +30,16 @@ server.post('Subscribe',
         var formProduct = formAjax.product;
         var formPhone = formAjax.phone;
 
-        if (!formAjax || !formProduct || !formPhone) {
+        if (!formAjax || !formProduct) {
             res.json({
                 error: true,
                 msg: Resource.msg('message.backInStock.error', 'common', null)
-            });     
+            });
+        } else if (!formPhone) {
+            res.json({
+                error: true,
+                msg: Resource.msg('message.backInStock.missing', 'common', null)
+            });
         } else {
             res.json({
                 success: true,
@@ -42,8 +48,6 @@ server.post('Subscribe',
         }
 
         // Populate custom object
-
-        var Transaction = require('dw/system/Transaction');
 
         try {
             Transaction.wrap(function() {
