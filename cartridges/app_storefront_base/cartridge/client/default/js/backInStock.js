@@ -3,5 +3,5 @@
 var processInclude = require('./util');
 
 $(document).ready(function () {
-    processInclude(require('./backInStock/backInStock'));
+    processInclude(require('./product/backInStock'));
 });

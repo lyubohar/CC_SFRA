@@ -56,7 +56,9 @@ server.post('Subscribe',
                 var keyValue = formProduct;
                 var backInStockObject = CustomObjectMgr.createCustomObject(type, keyValue);
 
-                backInStockObject.custom.phoneNumbers = formPhone;
+                var json = { phone: formPhone };
+
+                backInStockObject.custom.phoneNumbers = JSON.stringify(json.phone);
             });
         } catch (error) {
             error = true;

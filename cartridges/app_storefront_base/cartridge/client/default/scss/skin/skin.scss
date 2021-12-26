@@ -138,3 +138,11 @@ h6 {
 a {
     color: var(--skin-link-color-1);
 }
+
+// Lyubo fixes 
+
+.dropdown-menu a.dropdown-item {
+    @media (min-width: 769px) { // stylelint-disable-line
+        color: var(--skin-menu-color-1);
+    }
+}
