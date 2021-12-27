@@ -50,34 +50,7 @@ server.post('Subscribe',
 
         // Populate custom object
 
-        var existingObject = CustomObjectMgr.getAllCustomObjects('NotifyMeBackInStock');
-
-        while (existingObject.hasNext()) {
-            var existingProductId = existingObject.next().getCustom().productId
-
-            if (existingProductId === formProduct) {
-    
-                // var jsonExisting = { existingPhone: formPhone };
-                // var json = { phone: formPhone };
-                // backInStockObject.custom.phoneNumbers = JSON.stringify(jsonExisting.existingPhone, json.phone);
-
-            } else {
-                                
-                try {
-                    Transaction.wrap(function() {
-                        var type = 'NotifyMeBackInStock';
-                        var keyValue = formProduct;
-                        var backInStockObject = CustomObjectMgr.createCustomObject(type, keyValue);
-    
-                        backInStockObject.custom.phoneNumbers = formPhone;
-                    });
-                } catch (error) {
-                    error = true;
-                };  
-            }            
-        }
-
-        try {
+        var transaction = () => {                                           // Store transaction as a reusable function
             Transaction.wrap(function() {
                 var type = 'NotifyMeBackInStock';
                 var keyValue = formProduct;
@@ -85,6 +58,29 @@ server.post('Subscribe',
 
                 backInStockObject.custom.phoneNumbers = formPhone;
             });
+        }
+
+        var objects = CustomObjectMgr.getAllCustomObjects('NotifyMeBackInStock');
+        
+        while (objects.hasNext()) {                                         // Iterate to check if object already exists
+            var objectProductId = objects.next().getCustom().productId
+            if (objectProductId === formProduct) {                          // If exists
+    
+                // var jsonExisting = { existingPhone: formPhone };
+                // var json = { phone: formPhone };
+                // backInStockObject.custom.phoneNumbers = JSON.stringify(jsonExisting.existingPhone, json.phone);
+
+            } else {                                                        // If doesn't exist
+                try {
+                    transaction();
+                } catch (error) {
+                    error = true;
+                };  
+            }            
+        }
+
+        try {
+            transaction();
         } catch (error) {
             error = true;
         };         
