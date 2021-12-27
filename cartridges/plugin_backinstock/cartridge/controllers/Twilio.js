@@ -61,15 +61,15 @@ server.post('Subscribe',
             });
         }
         
-        // Populate custom object 
+        // Populate if custom objects already exist
 
         var objects = CustomObjectMgr.getAllCustomObjects('NotifyMeBackInStock'); 
         var error = false;
 
         while (objects.hasNext()) {   
-            var currentObjectProductId = objects.next().getCustom().productId;     // Iterate to check if object already exists
+            var currentObjectProductId = objects.next().getCustom().productId;     // Iterate to see if object for current product exists
 
-            if (currentObjectProductId === formProduct) {                          // If exists
+            if (currentObjectProductId === formProduct) {                          // If yes
                 var currentObjectPhoneNumbers = CustomObjectMgr.getCustomObject(type, keyValue).getCustom().phoneNumbers;
                 
                 try {
@@ -81,7 +81,7 @@ server.post('Subscribe',
                     error = true;
                 };  
 
-            } else {                                                                // If doesn't exist
+                } else {                                                           // If no
                 try {
                     transaction();
                 } catch (error) {
@@ -89,6 +89,8 @@ server.post('Subscribe',
                 };  
             }            
         }
+
+        // Create new custom object if none exists
 
         try {
             transaction();
