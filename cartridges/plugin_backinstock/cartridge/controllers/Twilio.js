@@ -48,34 +48,40 @@ server.post('Subscribe',
             });           
         }
 
-        // Populate custom object
+        // Store transaction as a reusable function
+        
+        var type = 'NotifyMeBackInStock';
+        var keyValue = formProduct;
 
-        var transaction = () => {                                           // Store transaction as a reusable function
+        var transaction = () => {                                           
             Transaction.wrap(function() {
-                var type = 'NotifyMeBackInStock';
-                var keyValue = formProduct;
                 var backInStockObject = CustomObjectMgr.createCustomObject(type, keyValue);
 
                 backInStockObject.custom.phoneNumbers = formPhone;
             });
         }
-         
+        
+        // Populate custom object 
+
         var objects = CustomObjectMgr.getAllCustomObjects('NotifyMeBackInStock'); 
         var error = false;
 
         while (objects.hasNext()) {   
-            var objectProductId = objects.next().getCustom().productId;     // Iterate to check if object already exists
+            var currentObjectProductId = objects.next().getCustom().productId;     // Iterate to check if object already exists
 
-            if (objectProductId === formProduct) {                          // If exists
-                var objectPhoneNumbers = CustomObjectMgr.getCustomObject('NotifyMeBackInStock', formProduct).getCustom().phoneNumbers;
-                Transaction.wrap(function() {
-                    var type = 'NotifyMeBackInStock';
-                    var keyValue = formProduct;
-                    var backInStockObject = CustomObjectMgr.getCustomObject(type, keyValue); 
-                   
-                    backInStockObject.custom.phoneNumbers = objectPhoneNumbers + "," + formPhone;
-                });
-            } else {                                                        // If doesn't exist
+            if (currentObjectProductId === formProduct) {                          // If exists
+                var currentObjectPhoneNumbers = CustomObjectMgr.getCustomObject(type, keyValue).getCustom().phoneNumbers;
+                
+                try {
+                    Transaction.wrap(function() {
+                        var backInStockObject = CustomObjectMgr.getCustomObject(type, keyValue); 
+                        backInStockObject.custom.phoneNumbers = currentObjectPhoneNumbers + "," + formPhone;
+                    });
+                } catch (error) {
+                    error = true;
+                };  
+
+            } else {                                                                // If doesn't exist
                 try {
                     transaction();
                 } catch (error) {
