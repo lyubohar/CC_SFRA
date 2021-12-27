@@ -59,20 +59,21 @@ server.post('Subscribe',
                 backInStockObject.custom.phoneNumbers = formPhone;
             });
         }
+         
+        var objects = CustomObjectMgr.getAllCustomObjects('NotifyMeBackInStock'); 
+        var error = false;
 
-        var objects = CustomObjectMgr.getAllCustomObjects('NotifyMeBackInStock');
-
-        while (objects.hasNext()) {                                         // Iterate to check if object already exists
-            var objectProductId = objects.next().getCustom().productId;
+        while (objects.hasNext()) {   
+            var objectProductId = objects.next().getCustom().productId;     // Iterate to check if object already exists
 
             if (objectProductId === formProduct) {                          // If exists
-                // var objectPhoneNumbers = objects.getCustom().phoneNumbers; // kak da gi vzimam samo za toq product
+                var objectPhoneNumbers = CustomObjectMgr.getCustomObject('NotifyMeBackInStock', formProduct).getCustom().phoneNumbers;
                 Transaction.wrap(function() {
                     var type = 'NotifyMeBackInStock';
                     var keyValue = formProduct;
                     var backInStockObject = CustomObjectMgr.getCustomObject(type, keyValue); 
                    
-                    backInStockObject.custom.phoneNumbers = 'test' + formPhone;
+                    backInStockObject.custom.phoneNumbers = objectPhoneNumbers + "," + formPhone;
                 });
             } else {                                                        // If doesn't exist
                 try {
