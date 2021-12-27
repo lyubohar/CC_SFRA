@@ -23,6 +23,7 @@ server.post('Subscribe',
     function (req, res, next) {
         var Resource = require('dw/web/Resource');
         var Transaction = require('dw/system/Transaction');
+        var CustomObjectMgr = require('dw/object/CustomObjectMgr');
 
         // Take form values from Ajax
 
@@ -49,21 +50,45 @@ server.post('Subscribe',
 
         // Populate custom object
 
+        var existingObject = CustomObjectMgr.getAllCustomObjects('NotifyMeBackInStock');
+
+        while (existingObject.hasNext()) {
+            var existingProductId = existingObject.next().getCustom().productId
+
+            if (existingProductId === formProduct) {
+    
+                // var jsonExisting = { existingPhone: formPhone };
+                // var json = { phone: formPhone };
+                // backInStockObject.custom.phoneNumbers = JSON.stringify(jsonExisting.existingPhone, json.phone);
+
+            } else {
+                                
+                try {
+                    Transaction.wrap(function() {
+                        var type = 'NotifyMeBackInStock';
+                        var keyValue = formProduct;
+                        var backInStockObject = CustomObjectMgr.createCustomObject(type, keyValue);
+    
+                        backInStockObject.custom.phoneNumbers = formPhone;
+                    });
+                } catch (error) {
+                    error = true;
+                };  
+            }            
+        }
+
         try {
             Transaction.wrap(function() {
-                var CustomObjectMgr = require('dw/object/CustomObjectMgr'); 
                 var type = 'NotifyMeBackInStock';
                 var keyValue = formProduct;
                 var backInStockObject = CustomObjectMgr.createCustomObject(type, keyValue);
 
-                var json = { phone: formPhone };
-
-                backInStockObject.custom.phoneNumbers = JSON.stringify(json.phone);
+                backInStockObject.custom.phoneNumbers = formPhone;
             });
         } catch (error) {
             error = true;
-        };
-
+        };         
+        
         return next();
 });
 
