@@ -61,15 +61,19 @@ server.post('Subscribe',
         }
 
         var objects = CustomObjectMgr.getAllCustomObjects('NotifyMeBackInStock');
-        
-        while (objects.hasNext()) {                                         // Iterate to check if object already exists
-            var objectProductId = objects.next().getCustom().productId
-            if (objectProductId === formProduct) {                          // If exists
-    
-                // var jsonExisting = { existingPhone: formPhone };
-                // var json = { phone: formPhone };
-                // backInStockObject.custom.phoneNumbers = JSON.stringify(jsonExisting.existingPhone, json.phone);
 
+        while (objects.hasNext()) {                                         // Iterate to check if object already exists
+            var objectProductId = objects.next().getCustom().productId;
+
+            if (objectProductId === formProduct) {                          // If exists
+                // var objectPhoneNumbers = objects.getCustom().phoneNumbers; // kak da gi vzimam samo za toq product
+                Transaction.wrap(function() {
+                    var type = 'NotifyMeBackInStock';
+                    var keyValue = formProduct;
+                    var backInStockObject = CustomObjectMgr.getCustomObject(type, keyValue); 
+                   
+                    backInStockObject.custom.phoneNumbers = 'test' + formPhone;
+                });
             } else {                                                        // If doesn't exist
                 try {
                     transaction();
