@@ -61,20 +61,22 @@ server.post('Subscribe',
             });
         }
         
-        // Populate if custom objects already exist
+        // Proceed if custom objects already exist
 
-        var objects = CustomObjectMgr.getAllCustomObjects('NotifyMeBackInStock'); 
+        var allObjects = CustomObjectMgr.getAllCustomObjects(type); 
+        var currentObject = CustomObjectMgr.getCustomObject(type, keyValue);
         var error = false;
 
-        while (objects.hasNext()) {   
-            var currentObjectProductId = objects.next().getCustom().productId;     // Iterate to see if object for current product exists
+        while (allObjects.hasNext()) {   
+            var currentObjectProductId = allObjects.next().getCustom().productId;  // Iterate to see if object for current product exists
 
             if (currentObjectProductId === formProduct) {                          // If yes
-                var currentObjectPhoneNumbers = CustomObjectMgr.getCustomObject(type, keyValue).getCustom().phoneNumbers;
+                var currentObjectPhoneNumbers = currentObject.getCustom().phoneNumbers;
                 
                 try {
                     Transaction.wrap(function() {
-                        var backInStockObject = CustomObjectMgr.getCustomObject(type, keyValue); 
+                        var backInStockObject = currentObject; 
+                        
                         backInStockObject.custom.phoneNumbers = currentObjectPhoneNumbers + "," + formPhone;
                     });
                 } catch (error) {
