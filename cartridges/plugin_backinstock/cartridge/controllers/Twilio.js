@@ -75,9 +75,7 @@ server.post('Subscribe',
                 
                 try {
                     Transaction.wrap(function() {
-                        var backInStockObject = currentObject; 
-                        
-                        backInStockObject.custom.phoneNumbers = currentObjectPhoneNumbers + "," + formPhone;
+                        currentObject.custom.phoneNumbers = currentObjectPhoneNumbers + "," + formPhone;
                     });
                 } catch (error) {
                     error = true;
