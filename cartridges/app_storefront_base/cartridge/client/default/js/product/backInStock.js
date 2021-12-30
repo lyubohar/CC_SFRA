@@ -28,38 +28,52 @@
     }, 3000);
 }
 
+function displayMessage2(data) {
+
+}
+
 /**
  * Ajax call with form data.
  */
 
 module.exports = {
-    notifyWhenInStock: function () {
+    backInStock: function () {
         
-        // ... validation rules come here,
-
         $('form.back-in-stock-form').submit(function (e) {
             e.preventDefault();
             var formElement = $(this);
+            var phoneElement = $('#phone');
             var buttonElement = $('.back-in-stock-submit');
             var url = formElement.attr('action');
+            var pattern = /^([00359]{5})?([0-9]{9})$/;
 
-            $.spinner().start();
-            buttonElement.attr('disabled', true);
-            $.ajax({
-                url: url,
-                type: 'post',
-                dataType: 'json',
-                data: formElement.serialize(),
-                success: function (data) {
-                    displayMessage(data, buttonElement);
-                    if (data.success) {
-                        $('.back-in-stock-form').trigger('reset');
+            if (pattern.test(phoneElement.val())) {                     // Validate phone number field
+                $.spinner().start();
+                buttonElement.attr('disabled', true);
+
+                $.ajax({                                                // If validated, run AJAX code
+                    url: url,
+                    type: 'post',
+                    dataType: 'json',
+                    data: formElement.serialize(),
+                    success: function (data) {
+                        displayMessage(data, buttonElement);
+                        if (data.success) {
+                            $('.back-in-stock-form').trigger('reset');                            
+                        }
+                    },
+                    error: function (err) {
+                        displayMessage(err, buttonElement);
                     }
-                },
-                error: function (err) {
-                    displayMessage(err, buttonElement);
-                }
-            });
+                });
+
+                $('.invalid-feedback').replaceWith('<div class="invalid-feedback"></div>');
+            } else {
+                $(phoneElement)
+                    .addClass('is-invalid')
+                    .siblings('.invalid-feedback')
+                    .replaceWith('<div class="invalid-feedback" style="display: block;">' + 'Invalid phone number.' + '</div>');
+            }
         });
     }
 };
