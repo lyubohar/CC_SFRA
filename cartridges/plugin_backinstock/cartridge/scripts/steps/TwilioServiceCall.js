@@ -15,23 +15,42 @@ module.exports.execute = function () {
         var currentProduct = ProductMgr.getProduct(currentObjectProductId);
         var currentProductAvailability = currentProduct.getAvailabilityModel().isInStock();
 
-        if (currentProductAvailability === true) {
-            
-            // Twilio service call
-            
-            // Delete custom objects
-
-            try {
-            } catch (error) {
-                error = true;
-            } finally {
-                Transaction.wrap(function () {
-                    CustomObjectMgr.remove(currentObject);
-                });
-            }
-
-        } else {                                                            
-            
-        }            
+        return currentProductAvailability;
     }
+
+    if (currentProductAvailability === true) {
+        
+        // Twilio service call
+
+        // function backToStockService() {
+
+        //     var localServiceRegistry = dw.svc.LocalServiceRegistry
+        //     var getTwilioService = localServiceRegistry.createService("Twilio", {
+        
+        //         createRequest: function(svc, args) {
+        //             svc.setRequestMethod('POST');
+        //             return args;
+        //         },
+        
+        //         parseResponse: function(svc, client) {
+        //             return client.text;
+        //         }
+        
+        //     });
+        
+        //     var response = getTwilioService.call().object;
+        //     return response;
+          
+        // };
+        
+        // Delete custom objects
+
+        try {
+            Transaction.wrap(function () {
+                CustomObjectMgr.remove(currentObject);
+            });            
+        } catch (error) {
+            error = true;
+        }
+    }    
 }
