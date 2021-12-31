@@ -9,14 +9,15 @@ module.exports.execute = function () {
     var allObjects = CustomObjectMgr.getAllCustomObjects(type);
     var error = false;
     
-    while (allObjects.hasNext()) {
+    while (allObjects !== null && allObjects.hasNext()) {
         var currentObject = allObjects.next();
         var currentObjectProductId = currentObject.getCustom().productId;
         var currentProduct = ProductMgr.getProduct(currentObjectProductId);
         var currentProductAvailability = currentProduct.getAvailabilityModel().isInStock();
-
-        return currentProductAvailability;
     }
+    return currentProductAvailability;
+
+    // currentProductAvailability = false;
 
     if (currentProductAvailability === true) {
         
