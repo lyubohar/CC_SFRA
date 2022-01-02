@@ -14,42 +14,52 @@ module.exports.execute = function () {
         var currentObjectProductId = currentObject.getCustom().productId;
         var currentProduct = ProductMgr.getProduct(currentObjectProductId);
         var currentProductAvailability = currentProduct.getAvailabilityModel().isInStock();
-        
-        if (currentProductAvailability === true) {
-            
-            // Twilio service call
-    
-            // function backToStockService() {
-    
-            //     var localServiceRegistry = dw.svc.LocalServiceRegistry
-            //     var getTwilioService = localServiceRegistry.createService("Twilio", {
-            
-            //         createRequest: function(svc, args) {
-            //             svc.setRequestMethod('POST');
-            //             return args;
-            //         },
-            
-            //         parseResponse: function(svc, client) {
-            //             return client.text;
-            //         }
-            
-            //     });
-            
-            //     var response = getTwilioService.call().object;
-            //     return response;
-              
-            // };
-            
-            // Delete custom objects
-    
-            try {
-                Transaction.wrap(function () {
-                    CustomObjectMgr.remove(currentObject);
-                });            
-            } catch (error) {
-                error = true;
-            }
-        }    
-    }
+        currentProductAvailability = true;
 
+        function backToStockService() {
+    
+            var localServiceRegistry = dw.svc.LocalServiceRegistry;
+            var smsTwilioService = localServiceRegistry.createService("plugin_backinstock.http.twilio.sms", {
+        
+                createRequest: function(svc, args) {
+                    svc.setRequestMethod('POST');
+                    svc.addParam('To', '+359888648469');
+                    svc.addParam('From', '+13048496496');
+                    svc.addParam('Body', 'Sent from Service Manager');
+                    return args;
+                },
+
+                parseResponse: function(svc, args, client) {
+                    return client.messages.create();
+                }
+        
+            });
+
+            var result = smsTwilioService.call().object;
+            
+            return result;
+          
+        };
+
+        backToStockService();
+        
+        exports.backToStockService = backToStockService;
+
+        // if (currentProductAvailability === true) {
+            
+        //     // Twilio service call
+    
+
+
+        //     // Delete custom objects
+    
+        //     try {
+        //         Transaction.wrap(function () {
+        //             CustomObjectMgr.remove(currentObject);
+        //         });            
+        //     } catch (error) {
+        //         error = true;
+        //     }
+        // }    
+    }
 }
