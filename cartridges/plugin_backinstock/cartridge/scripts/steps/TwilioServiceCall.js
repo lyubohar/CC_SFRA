@@ -22,12 +22,16 @@ module.exports.execute = function () {
             var localServiceRegistry = dw.svc.LocalServiceRegistry;
             var smsTwilioService = localServiceRegistry.createService("plugin_backinstock.http.twilio.sms", {
         
-                createRequest: function(svc, args) {
-                    // svc.setRequestMethod('POST');
-                    svc.addParam('To', '+359888648469');
-                    svc.addParam('From', '+13048496496');
-                    svc.addParam('Body', 'Sent from Service Manager');
-                    return args;
+                createRequest: function(svc) {
+                    svc.setRequestMethod('POST');
+                    svc.addHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                    var myRequest = {
+                        "To": '+359888648469',
+                        "From": '+13048496496',
+                        "Body": 'Sent from Service Manager'
+                    };
+                    return JSON.stringify(myRequest);
                 },
 
                 parseResponse: function(svc, args, client) {
