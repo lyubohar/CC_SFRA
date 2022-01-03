@@ -14,6 +14,7 @@ module.exports.execute = function () {
         var currentObjectProductId = currentObject.getCustom().productId;
         var currentProduct = ProductMgr.getProduct(currentObjectProductId);
         var currentProductAvailability = currentProduct.getAvailabilityModel().isInStock();
+        
         currentProductAvailability = true;
 
         function backToStockService() {
@@ -22,7 +23,7 @@ module.exports.execute = function () {
             var smsTwilioService = localServiceRegistry.createService("plugin_backinstock.http.twilio.sms", {
         
                 createRequest: function(svc, args) {
-                    svc.setRequestMethod('POST');
+                    // svc.setRequestMethod('POST');
                     svc.addParam('To', '+359888648469');
                     svc.addParam('From', '+13048496496');
                     svc.addParam('Body', 'Sent from Service Manager');
@@ -43,7 +44,7 @@ module.exports.execute = function () {
 
         backToStockService();
         
-        exports.backToStockService = backToStockService;
+        // exports.backToStockService = backToStockService;
 
         // if (currentProductAvailability === true) {
             
