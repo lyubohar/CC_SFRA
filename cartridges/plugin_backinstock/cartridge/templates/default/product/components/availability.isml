@@ -64,7 +64,7 @@
                                 class="form-control"
                                 name="phone"
                                 aria-describedby="phoneHelp"
-                                placeholder="ex. 00359888888888">
+                                placeholder="ex. 359888888888">
                             <div class="invalid-feedback"></div>
                         </div>  
                     </div>
