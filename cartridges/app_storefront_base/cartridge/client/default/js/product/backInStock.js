@@ -45,7 +45,7 @@ module.exports = {
             var phoneElement = $('#phone');
             var buttonElement = $('.back-in-stock-submit');
             var url = formElement.attr('action');
-            var pattern = /^([00359]{5})?([0-9]{9})$/;
+            var pattern = /^([359]{3})?([0-9]{9})$/;
 
             if (pattern.test(phoneElement.val())) {                     // Validate phone number field
                 $.spinner().start();

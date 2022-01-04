@@ -16,16 +16,25 @@ module.exports.execute = function () {
         var currentProductAvailability = currentProduct.getAvailabilityModel().isInStock();
         
         currentProductAvailability = true;
+        // if (currentProductAvailability === true) {
+            
+        // Twilio service call
 
-        function backToStockService() {
-
-            var productName = currentProduct.name;
+        function backInStockService() {
             var localServiceRegistry = dw.svc.LocalServiceRegistry;
             var smsTwilioService = localServiceRegistry.createService("plugin_backinstock.http.twilio.sms", {
-        
+
                 createRequest: function(svc) {
                     svc.addHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    var phoneTo = '359888648469';
+                    var productName = currentProduct.name;
+                    var allPhones = currentObject.getCustom().phoneNumbers;
+                    
+                    // Iterate through phone numbers
+                    var match = allPhones.split(',')
+                    for(var i = 0; i < match.length; i++) {
+                        var phoneTo = match[i];
+                    }
+                    
                     var phoneFrom = '13048496496';
                     var smsBody = 'Good news! Product *' + productName + '* is back in stock!'
                     var myRequestString = 'To=%2B' + phoneTo + '&From=%2B' + phoneFrom + '&Body=' + smsBody;
@@ -45,12 +54,7 @@ module.exports.execute = function () {
           
         };
 
-        backToStockService();
-        
-        // if (currentProductAvailability === true) {
-            
-        //     // Twilio service call
-    
+        backInStockService();
 
 
         //     // Delete custom objects
