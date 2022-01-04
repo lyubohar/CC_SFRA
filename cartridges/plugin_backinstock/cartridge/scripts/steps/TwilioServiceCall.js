@@ -57,13 +57,13 @@ module.exports.execute = function () {
 
         // Delete custom objects
     
-            try {
-                Transaction.wrap(function () {
-                    CustomObjectMgr.remove(currentObject);
-                });            
-            } catch (error) {
-                error = true;
-            }
+            // try {
+            //     Transaction.wrap(function () {
+            //         CustomObjectMgr.remove(currentObject);
+            //     });            
+            // } catch (error) {
+            //     error = true;
+            // }
         }    
     }
 }
