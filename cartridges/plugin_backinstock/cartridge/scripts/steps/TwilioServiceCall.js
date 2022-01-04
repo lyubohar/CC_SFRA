@@ -18,13 +18,18 @@ module.exports.execute = function () {
         currentProductAvailability = true;
 
         function backToStockService() {
-    
+
+            var productName = currentProduct.name;
             var localServiceRegistry = dw.svc.LocalServiceRegistry;
             var smsTwilioService = localServiceRegistry.createService("plugin_backinstock.http.twilio.sms", {
         
                 createRequest: function(svc) {
                     svc.addHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    var myRequestString = 'To=%2B359888648469&From=%2B13048496496&Body=Sent%20from%20Service%20Manager';
+                    var phoneTo = '359888648469';
+                    var phoneFrom = '13048496496';
+                    var smsBody = 'Good news! Product *' + productName + '* is back in stock!'
+                    var myRequestString = 'To=%2B' + phoneTo + '&From=%2B' + phoneFrom + '&Body=' + smsBody;
+
                     return myRequestString;
                 },
 
@@ -42,8 +47,6 @@ module.exports.execute = function () {
 
         backToStockService();
         
-        // exports.backToStockService = backToStockService;
-
         // if (currentProductAvailability === true) {
             
         //     // Twilio service call
