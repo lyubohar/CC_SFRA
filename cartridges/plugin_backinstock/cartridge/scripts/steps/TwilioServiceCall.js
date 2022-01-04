@@ -8,49 +8,42 @@ module.exports.execute = function () {
     var type = 'NotifyMeBackInStock';
     var allObjects = CustomObjectMgr.getAllCustomObjects(type);
     var error = false;
-    
-    while (allObjects !== null && allObjects.hasNext()) {
+
+    while (allObjects !== null && allObjects.hasNext()) {                   // Iterate through objects
         var currentObject = allObjects.next();
         var currentObjectProductId = currentObject.getCustom().productId;
         var currentProduct = ProductMgr.getProduct(currentObjectProductId);
         var currentProductAvailability = currentProduct.getAvailabilityModel().isInStock();
-            
-        // Twilio service call
+        var phonesArray = currentObject.getCustom().phoneNumbers.split(',');
 
-        function backInStockService() {
-            var localServiceRegistry = dw.svc.LocalServiceRegistry;
-            var smsTwilioService = localServiceRegistry.createService("plugin_backinstock.http.twilio.sms", {
+        if (currentProductAvailability === true) {                          // Check for product availability
 
-                createRequest: function(svc) {
-                    svc.addHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    var productName = currentProduct.name;
-                    var allPhones = currentObject.getCustom().phoneNumbers;
-                    
-                    // Iterate through phone numbers
-                    var match = allPhones.split(',')
-                    for(var i = 0; i < match.length; i++) {
-                        var phoneTo = match[i];
-                    }
-                    
-                    var phoneFrom = '13048496496';
-                    var smsBody = 'Good news! Product *' + productName + '* is back in stock!'
-                    var myRequestString = 'To=%2B' + phoneTo + '&From=%2B' + phoneFrom + '&Body=' + smsBody;
+            phonesArray.forEach(function (phoneTo) {                        // Iterate through phone numbers
 
-                    return myRequestString;
-                },
+            // Twilio service call
 
-                parseResponse: function(response) {
-                    return response;
-                }
+                function backInStockService() {
+                    var localServiceRegistry = dw.svc.LocalServiceRegistry;
+                    var smsTwilioService = localServiceRegistry.createService("plugin_backinstock.http.twilio.sms", {
         
+                        createRequest: function(svc) {
+                            svc.addHeader('Content-Type', 'application/x-www-form-urlencoded');
+                            var phoneFrom = '13048496496';
+                            var smsBody = 'Good news! Product *' + currentProduct.name + '* is back in stock!'
+                            var myRequestString = 'To=%2B' + phoneTo + '&From=%2B' + phoneFrom + '&Body=' + smsBody;
+        
+                            return myRequestString;
+                        },
+        
+                        parseResponse: function(response) {
+                            return response;
+                        }
+                
+                    });
+                    return smsTwilioService.call();
+                };
+                backInStockService();
             });
-            var result = smsTwilioService.call();
-            return result;
-        };
-
-        if (currentProductAvailability === true) {
-
-            backInStockService();
 
             // Delete custom objects
     
