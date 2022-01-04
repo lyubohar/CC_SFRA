@@ -15,8 +15,7 @@ module.exports.execute = function () {
         var currentProduct = ProductMgr.getProduct(currentObjectProductId);
         var currentProductAvailability = currentProduct.getAvailabilityModel().isInStock();
         
-        currentProductAvailability = true;
-        // if (currentProductAvailability === true) {
+        if (currentProductAvailability === true) {
             
         // Twilio service call
 
@@ -56,16 +55,15 @@ module.exports.execute = function () {
 
         backInStockService();
 
-
-        //     // Delete custom objects
+        // Delete custom objects
     
-        //     try {
-        //         Transaction.wrap(function () {
-        //             CustomObjectMgr.remove(currentObject);
-        //         });            
-        //     } catch (error) {
-        //         error = true;
-        //     }
-        // }    
+            try {
+                Transaction.wrap(function () {
+                    CustomObjectMgr.remove(currentObject);
+                });            
+            } catch (error) {
+                error = true;
+            }
+        }    
     }
 }
