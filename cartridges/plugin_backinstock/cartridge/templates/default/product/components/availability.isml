@@ -59,6 +59,7 @@
                                 <isprint value="${Resource.msg('label.profile.phone', 'account', null)}" encoding="htmlcontent" />
                             </label>
                             <input
+                                required
                                 id="phone"
                                 type="text"
                                 class="form-control"
