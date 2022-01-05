@@ -34,52 +34,54 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="backInStockModal" tabindex="-1" role="dialog" aria-labelledby="backInStockLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <isscript>
-                    var ContentMgr = require('dw/content/ContentMgr');
-                    var backInStockTitle = ContentMgr.getContent('back-in-stock-title');
-                </isscript> 
-                <isif condition="${!empty(backInStockTitle) && backInStockTitle.isOnline()}">
-                    <isprint value="${backInStockTitle.custom.body}" encoding="off" />
-                </isif>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
+<isif condition="${!product.available}">
+    <div class="modal fade" id="backInStockModal" tabindex="-1" role="dialog" aria-labelledby="backInStockLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <isscript>
+                        var ContentMgr = require('dw/content/ContentMgr');
+                        var backInStockTitle = ContentMgr.getContent('back-in-stock-title');
+                    </isscript> 
+                    <isif condition="${!empty(backInStockTitle) && backInStockTitle.isOnline()}">
+                        <isprint value="${backInStockTitle.custom.body}" encoding="off" />
+                    </isif>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
 
-            <div class="modal-body">
-                <form class="back-in-stock-form" action="${URLUtils.url('Twilio-Subscribe')}" method="POST">
-                    <div class="back-in-stock-body">
-                        <div class="form-group">
-                            <input type="hidden" value="${product.id}" name="product" >
+                <div class="modal-body">
+                    <form class="back-in-stock-form" action="${URLUtils.url('Twilio-Subscribe')}" method="POST">
+                        <div class="back-in-stock-body">
+                            <div class="form-group">
+                                <input type="hidden" value="${product.id}" name="product" >
+                            </div>
+                            <div class="form-group required">
+                                <label class="form-control-label" for="phone">
+                                    <isprint value="${Resource.msg('label.profile.phone', 'account', null)}" encoding="htmlcontent" />
+                                </label>
+                                <input
+                                    required
+                                    id="phone"
+                                    type="text"
+                                    class="form-control"
+                                    name="phone"
+                                    aria-describedby="phoneHelp"
+                                    placeholder="ex. 359888888888">
+                                <div class="invalid-feedback"></div>
+                            </div>  
                         </div>
-                        <div class="form-group required">
-                            <label class="form-control-label" for="phone">
-                                <isprint value="${Resource.msg('label.profile.phone', 'account', null)}" encoding="htmlcontent" />
-                            </label>
-                            <input
-                                required
-                                id="phone"
-                                type="text"
-                                class="form-control"
-                                name="phone"
-                                aria-describedby="phoneHelp"
-                                placeholder="ex. 359888888888">
-                            <div class="invalid-feedback"></div>
-                        </div>  
-                    </div>
-                    <div class="back-in-stock-btn">
-                        <button
-                            type="submit"
-                            name="submit" 
-                            value="submit" 
-                            class="btn btn-primary btn-block back-in-stock-submit">
-                            ${Resource.msg('button.send','login',null)}
-                        </button>
-                    </div>
-                </form>
+                        <div class="back-in-stock-btn">
+                            <button
+                                type="submit"
+                                name="submit" 
+                                value="submit" 
+                                class="btn btn-primary btn-block back-in-stock-submit">
+                                ${Resource.msg('button.send','login',null)}
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</isif>
