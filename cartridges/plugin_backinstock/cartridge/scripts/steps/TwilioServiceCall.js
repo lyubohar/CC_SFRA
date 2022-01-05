@@ -20,7 +20,10 @@ module.exports.execute = function () {
 
             phonesArray.forEach(function (phoneTo) {                        // Iterate through phone numbers
 
-            // Twilio service call
+/**
+ * Handles Twilio service. Sends request as body (x-www-form-urlencoded format) and gets response.
+ * @returns {String} - returns string with data to be sent to the Twilio API for processing.
+*/
 
                 function backInStockService() {
                     var localServiceRegistry = dw.svc.LocalServiceRegistry;
@@ -30,9 +33,9 @@ module.exports.execute = function () {
                             svc.addHeader('Content-Type', 'application/x-www-form-urlencoded');
                             var phoneFrom = '13048496496';
                             var smsBody = 'Good news! Product *' + currentProduct.name + '* is back in stock!'
-                            var myRequestString = 'To=%2B' + phoneTo + '&From=%2B' + phoneFrom + '&Body=' + smsBody;
+                            var requestString = 'To=%2B' + phoneTo + '&From=%2B' + phoneFrom + '&Body=' + smsBody;
         
-                            return myRequestString;
+                            return requestString;
                         },
         
                         parseResponse: function(response) {
