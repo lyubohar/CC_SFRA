@@ -67,18 +67,22 @@ server.post('Subscribe',
         var currentObject = CustomObjectMgr.getCustomObject(type, keyValue);
         var error = false;
 
-        while (allObjects.hasNext()) {   
+        while (allObjects.hasNext()) {  
+
             // Iterate all objects to see if any object exists for current product
             var currentObjectProductId = allObjects.next().getCustom().productId;  
             
             // If yes
             if (currentObjectProductId === formProduct) {                          
                 var currentObjectPhoneNumbers = currentObject.getCustom().phoneNumbers; 
+                var mergedPhoneNumbers = currentObjectPhoneNumbers + "," + formPhone; // Merge new with existing
+                var filteredPhoneNumbers = Array.from(new Set(mergedPhoneNumbers.split(','))).toString(); // Remove duplicates
 
                 try {
                     Transaction.wrap(function() {
-                        // Store old data joined with new data
-                        currentObject.custom.phoneNumbers = currentObjectPhoneNumbers + "," + formPhone; 
+
+                        // Store old data merged with new data
+                        currentObject.custom.phoneNumbers = filteredPhoneNumbers; 
                     });
                 } catch (error) {
                     error = true;
