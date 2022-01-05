@@ -28,10 +28,6 @@
     }, 3000);
 }
 
-function displayMessage2(data) {
-
-}
-
 /**
  * Ajax call with form data.
  */
@@ -59,7 +55,10 @@ module.exports = {
                     success: function (data) {
                         displayMessage(data, buttonElement);
                         if (data.success) {
-                            $('.back-in-stock-form').trigger('reset');                            
+                            $('.back-in-stock-form').trigger('reset');  
+                            setTimeout(function () {
+                                $('#backInStockModal').modal('hide');
+                            }, 3000);                                                      
                         }
                     },
                     error: function (err) {
