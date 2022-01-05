@@ -68,20 +68,24 @@ server.post('Subscribe',
         var error = false;
 
         while (allObjects.hasNext()) {   
-            var currentObjectProductId = allObjects.next().getCustom().productId;  // Iterate all objects to see if any object exists for current product
+            // Iterate all objects to see if any object exists for current product
+            var currentObjectProductId = allObjects.next().getCustom().productId;  
+            
+            // If yes
+            if (currentObjectProductId === formProduct) {                          
+                var currentObjectPhoneNumbers = currentObject.getCustom().phoneNumbers; 
 
-            if (currentObjectProductId === formProduct) {                          // If yes
-                var currentObjectPhoneNumbers = currentObject.getCustom().phoneNumbers; // Take phones field for current object
-                
                 try {
                     Transaction.wrap(function() {
-                        currentObject.custom.phoneNumbers = currentObjectPhoneNumbers + "," + formPhone; // Store old data joined with new data
+                        // Store old data joined with new data
+                        currentObject.custom.phoneNumbers = currentObjectPhoneNumbers + "," + formPhone; 
                     });
                 } catch (error) {
                     error = true;
                 };  
 
-                } else {                                                           // If no, just store new data
+                // If no, just store new data
+                } else {                                                          
                 try {
                     transaction();
                 } catch (error) {
