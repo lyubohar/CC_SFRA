@@ -9,6 +9,18 @@ module.exports.execute = function () {
     var allObjects = CustomObjectMgr.getAllCustomObjects(type);
     var error = false;
 
+    // Delete custom objects
+            
+    function deleteCustomObjects() {
+        try {
+            Transaction.wrap(function () {
+                CustomObjectMgr.remove(currentObject);
+            });            
+        } catch (error) {
+            error = true;
+        }
+    }
+
     while (allObjects !== null && allObjects.hasNext()) {                   // Iterate through objects
         var currentObject = allObjects.next();
         var currentObjectProductId = currentObject.getCustom().productId;
@@ -46,17 +58,7 @@ module.exports.execute = function () {
                     return smsTwilioService.call();
                 };
                 backInStockService();
-            });
-
-            // Delete custom objects
-    
-            try {
-                Transaction.wrap(function () {
-                    CustomObjectMgr.remove(currentObject);
-                });            
-            } catch (error) {
-                error = true;
-            }
+            }, deleteCustomObjects());
         }    
     }
 }
