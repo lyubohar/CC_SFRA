@@ -15,12 +15,12 @@
     }
 
     if ($('.back-in-stock-message').length === 0) {
-        $('.modal .modal-content').append(
+        $('body').append(
             '<div class="back-in-stock-message"></div>'
         );
     }
     $('.back-in-stock-message')
-        .append('<div class="back-in-stock-alert text-center ' + status + '" role="alert">' + data.msg + '</div>');
+        .append('<div class="back-in-stock-alert ' + status + '" role="alert">' + data.msg + '</div>');
 
     setTimeout(function () {
         $('.back-in-stock-message').remove();
@@ -56,9 +56,7 @@ module.exports = {
                         displayMessage(data, buttonElement);
                         if (data.success) {
                             $('.back-in-stock-form').trigger('reset');  
-                            setTimeout(function () {
-                                $('#backInStockModal').modal('hide');
-                            }, 3000);                                                      
+                            $('#backInStockModal').modal('hide');                    
                         }
                     },
                     error: function (err) {

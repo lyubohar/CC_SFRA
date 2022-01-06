@@ -205,3 +205,16 @@ label.availability {
         }
     }
 }
+
+.back-in-stock-message {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translateX(-50%);
+    z-index: 2000;
+    .back-in-stock-alert {
+        text-align: center;
+        padding: 10px;
+        border-radius: 5px;
+    }
+}
