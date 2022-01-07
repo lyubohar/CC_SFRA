@@ -2,10 +2,11 @@
 
 /**
  * Display the returned message.
- * @param {string} data - data returned from the server's ajax call
+ * @param {string} data - data returned from the ajax call
  * @param {Object} buttonElement - button that was clicked for signing-up
  */
- function displayMessage(data, buttonElement) {
+
+function displayMessage(data, buttonElement) {
     $.spinner().stop();
     var status;
     if (data.success) {
@@ -29,7 +30,7 @@
 }
 
 /**
- * Does Ajax call to take URL from form element, collect data as JSON and pass to controller.
+ * Does Ajax call to take URL from the <form> element, collect data as JSON and pass to controller.
  */
 
 module.exports = {
@@ -55,8 +56,8 @@ module.exports = {
                     success: function (data) {
                         displayMessage(data, buttonElement);
                         if (data.success) {
-                            $('.back-in-stock-form').trigger('reset');  
-                            $('#backInStockModal').modal('hide');                    
+                            $('.back-in-stock-form').trigger('reset');
+                            $('#backInStockModal').modal('hide');
                         }
                     },
                     error: function (err) {
