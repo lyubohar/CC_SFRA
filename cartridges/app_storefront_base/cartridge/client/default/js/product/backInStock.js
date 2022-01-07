@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Display the returned message.
+ * Displays the returned message fron controller for success or error.
  * @param {string} data - data returned from the ajax call
  * @param {Object} buttonElement - button that was clicked for signing-up
  */
@@ -30,7 +30,10 @@ function displayMessage(data, buttonElement) {
 }
 
 /**
- * Does Ajax call to take URL from the <form> element, collect data as JSON and pass to controller.
+ * Ajax POST call to the controller with the collected form data as JSON. * 
+ * Receives back from controller success/error states and respective msg and gives them to displayMessage for showing on the 
+ * front-end.
+ * @param {string} data - Response from the controller
  */
 
 module.exports = {
@@ -53,14 +56,14 @@ module.exports = {
                     type: 'post',
                     dataType: 'json',
                     data: formElement.serialize(),
-                    success: function (data) {
+                    success: function (data) {                          
                         displayMessage(data, buttonElement);
                         if (data.success) {
                             $('.back-in-stock-form').trigger('reset');
                             $('#backInStockModal').modal('hide');
                         }
                     },
-                    error: function (err) {
+                    error: function (err) {                             
                         displayMessage(err, buttonElement);
                     }
                 });
