@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @namespace 
+ * @namespace Product
  */
 
 var server = require('server');
@@ -12,8 +12,8 @@ var server = require('server');
  * @function
  * @memberof Twilio
  * @param {middleware} - server.middleware.https
- * @param {httpparameter} - notifyProductId - ID of the product
- * @param {httpparameter} - notifyPhone - Phone of the shopper
+ * @param {httpparameter} - formProduct - ID of the product
+ * @param {httpparameter} - formPhone - Phone of the shopper
  * @param {category} - sensitive
  * @param {returns} - json
  * @param {serverfunction} - post
@@ -28,9 +28,8 @@ server.post('Subscribe',
 
         // Take form values from Ajax
 
-        var formAjax = req.form;
-        var formProduct = formAjax.product;
-        var formPhone = formAjax.phone;
+        var formProduct = req.form.product;
+        var formPhone = req.form.phone;
 
         // Store transaction as a reusable function
         

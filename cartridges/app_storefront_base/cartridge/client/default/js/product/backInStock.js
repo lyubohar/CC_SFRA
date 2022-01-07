@@ -3,7 +3,7 @@
 /**
  * Display the returned message.
  * @param {string} data - data returned from the server's ajax call
- * @param {Object} buttonElement - button that was clicked for sign-up
+ * @param {Object} buttonElement - button that was clicked for signing-up
  */
  function displayMessage(data, buttonElement) {
     $.spinner().stop();
@@ -29,7 +29,7 @@
 }
 
 /**
- * Ajax call with form data.
+ * Does Ajax call to take URL from form element, collect data as JSON and pass to controller.
  */
 
 module.exports = {
