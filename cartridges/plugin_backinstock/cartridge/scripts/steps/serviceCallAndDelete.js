@@ -1,4 +1,11 @@
-// Query all custom objects with id = 'NotifyMeBackInStock'. Loop them and check the product availability. If the product is back in stock, make a service call to Twilio API for all phone numbers stored in that custom objects. When process finished successfully, delete the custom object.
+/**
+ * Query all custom objects with id = 'NotifyMeBackInStock'. Loop them and check the product availability. If the product is 
+ * back in stock, make a service call to Twilio API for all phone numbers stored in that custom objects. When process finished 
+ * successfully, delete the custom object.
+ * 
+ * Handles Twilio service. Sends request as body (x-www-form-urlencoded format) and gets response.
+ * @returns {String} - returns string with data to be sent to the Twilio API for processing.
+*/
 
 var CustomObjectMgr = require('dw/object/CustomObjectMgr');
 var ProductMgr = require('dw/catalog/ProductMgr');
@@ -9,19 +16,9 @@ module.exports.execute = function () {
     var allObjects = CustomObjectMgr.getAllCustomObjects(type);
     var error = false;
 
-    // Delete custom objects
-            
-    function deleteCustomObjects() {
-        try {
-            Transaction.wrap(function () {
-                CustomObjectMgr.remove(currentObject);
-            });            
-        } catch (error) {
-            error = true;
-        }
-    }
-
-    while (allObjects !== null && allObjects.hasNext()) {                   // Iterate through objects
+    // Iterate through objects
+    
+    while (allObjects !== null && allObjects.hasNext()) {                   
         var currentObject = allObjects.next();
         var currentObjectProductId = currentObject.getCustom().productId;
         var currentProduct = ProductMgr.getProduct(currentObjectProductId);
@@ -29,15 +26,8 @@ module.exports.execute = function () {
         var phonesArray = currentObject.getCustom().phoneNumbers.split(',');
 
         if (currentProductAvailability === true) {                          // Check for product availability
-
             phonesArray.forEach(function (phoneTo) {                        // Iterate through phone numbers
-
-/**
- * Handles Twilio service. Sends request as body (x-www-form-urlencoded format) and gets response.
- * @returns {String} - returns string with data to be sent to the Twilio API for processing.
-*/
-
-                function backInStockService() {
+                function backInStockService() {                             // Twilio service call
                     var localServiceRegistry = dw.svc.LocalServiceRegistry;
                     var smsTwilioService = localServiceRegistry.createService("plugin_backinstock.http.twilio.sms", {
         
@@ -61,4 +51,16 @@ module.exports.execute = function () {
             }, deleteCustomObjects());
         }    
     }
+    
+    // Delete custom objects
+            
+    function deleteCustomObjects() {
+        try {
+            Transaction.wrap(function () {
+                CustomObjectMgr.remove(currentObject);
+            });            
+        } catch (error) {
+            error = true;
+        }
+    }    
 }
