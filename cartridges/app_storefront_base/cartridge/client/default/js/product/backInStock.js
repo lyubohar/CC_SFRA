@@ -69,7 +69,7 @@ module.exports = {
                 $(phoneElement)
                     .addClass('is-invalid')
                     .siblings('.invalid-feedback')
-                    .replaceWith('<div class="invalid-feedback" style="display: block;">' + 'Invalid phone number.' + '</div>');
+                    .css(display, block);
             }
         });
     }

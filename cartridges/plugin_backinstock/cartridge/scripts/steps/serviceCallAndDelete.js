@@ -7,6 +7,7 @@
  * @returns {String} - returns string with data to be sent to the Twilio API for processing.
 */
 
+var Resource = require('dw/web/Resource');
 var CustomObjectMgr = require('dw/object/CustomObjectMgr');
 var ProductMgr = require('dw/catalog/ProductMgr');
 var Transaction = require('dw/system/Transaction');
@@ -34,7 +35,7 @@ module.exports.execute = function () {
                         createRequest: function(svc) {
                             svc.addHeader('Content-Type', 'application/x-www-form-urlencoded');
                             var phoneFrom = '13048496496';
-                            var smsBody = 'Good news! Product *' + currentProduct.name + '* is back in stock!'
+                            var smsBody = Resource.msg('message.backInStock.bodystart', 'common', null) + currentProduct.name + Resource.msg('message.backInStock.bodyend', 'common', null)
                             var requestString = 'To=%2B' + phoneTo + '&From=%2B' + phoneFrom + '&Body=' + smsBody;
         
                             return requestString;

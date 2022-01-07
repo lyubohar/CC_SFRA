@@ -60,14 +60,13 @@
                                     <isprint value="${Resource.msg('label.profile.phone', 'account', null)}" encoding="htmlcontent" />
                                 </label>
                                 <input
-                                    required
                                     id="phone"
                                     type="text"
                                     class="form-control"
                                     name="phone"
                                     aria-describedby="phoneHelp"
                                     placeholder="ex. 359888888888">
-                                <div class="invalid-feedback"></div>
+                                <div class="invalid-feedback">${Resource.msg('message.backInStock.regex', 'common', null)}</div>
                             </div>  
                         </div>
                         <div class="back-in-stock-btn">
