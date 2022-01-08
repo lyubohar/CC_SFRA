@@ -32,6 +32,11 @@ server.post('Subscribe',
         var formProduct = req.form.product;
         var formPhone = req.form.phone;
 
+        // Reusable json error/success states
+
+        var jsonSuccess = { success: true, msg: Resource.msg('message.backInStock.success', 'common', null) };
+        var jsonError = { error: true, msg: Resource.msg('message.backInStock.error', 'common', null) };
+
         // Store transaction in a reusable function
         
         var type = 'NotifyMeBackInStock';
@@ -40,17 +45,11 @@ server.post('Subscribe',
         var transaction = () => {                                           
             Transaction.wrap(function() {
                 if (!formProduct) {
-                    res.json({
-                        error: true,
-                        msg: Resource.msg('message.backInStock.error', 'common', null)
-                    });
+                    res.json(jsonError);
                 } else {
                     var backInStockObject = CustomObjectMgr.createCustomObject(type, keyValue);
                     backInStockObject.custom.phoneNumbers = formPhone;
-                    res.json({
-                        success: true,
-                        msg: Resource.msg('message.backInStock.success', 'common', null)
-                    });                               
+                    res.json(jsonSuccess);                               
                 }
             });
         }
@@ -71,16 +70,10 @@ server.post('Subscribe',
                 try {
                     Transaction.wrap(function() {
                         currentObject.custom.phoneNumbers = filteredPhoneNumbers; // Store old data merged with new data 
-                        res.json({
-                            success: true,
-                            msg: Resource.msg('message.backInStock.success', 'common', null)
-                        });                         
+                        res.json(jsonSuccess);                        
                     });
                 } catch (error) {
-                    res.json({
-                        error: true,
-                        msg: Resource.msg('message.backInStock.error', 'common', null)
-                    });
+                    res.json(jsonError);
                 };   
             }            
         }
@@ -91,10 +84,7 @@ server.post('Subscribe',
             try {
                 transaction();
             } catch (error) {
-                res.json({
-                    error: true,
-                    msg: Resource.msg('message.backInStock.error', 'common', null)
-                });
+                res.json(jsonError);
             };         
         }
         
