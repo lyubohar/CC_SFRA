@@ -27,7 +27,7 @@ server.post('Subscribe',
         var CustomObjectMgr = require('dw/object/CustomObjectMgr');
         var error = false;
 
-        // Take form values from Ajax
+        // Take form values from Ajax call
 
         var formProduct = req.form.product;
         var formPhone = req.form.phone;
@@ -55,14 +55,12 @@ server.post('Subscribe',
             });
         }
 
-        // Check if custom objects already exist
+        // Check if custom objects already exist and if matches current product
 
         var allObjects = CustomObjectMgr.getAllCustomObjects(type); 
         var currentObject = CustomObjectMgr.getCustomObject(type, keyValue);
 
         while (allObjects.hasNext()) {  
-
-            // Check if any existing object matches current product
             var currentObjectProductId = allObjects.next().getCustom().productId;  
             
             if (currentObjectProductId === formProduct) {                          
@@ -72,9 +70,7 @@ server.post('Subscribe',
 
                 try {
                     Transaction.wrap(function() {
-
-                        // Store old data merged with new data
-                        currentObject.custom.phoneNumbers = filteredPhoneNumbers; 
+                        currentObject.custom.phoneNumbers = filteredPhoneNumbers; // Store old data merged with new data 
                         res.json({
                             success: true,
                             msg: Resource.msg('message.backInStock.success', 'common', null)
