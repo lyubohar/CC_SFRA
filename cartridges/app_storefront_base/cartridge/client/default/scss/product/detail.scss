@@ -213,6 +213,7 @@ label.availability {
     top: 15%;
     left: 50vw; // use vw to compensate for scroller and avoid jumping
     transform: translateX(-50%);
+    z-index: 2000;
     .back-in-stock-alert {
         padding: 15px 25px;
         border-radius: 5px;

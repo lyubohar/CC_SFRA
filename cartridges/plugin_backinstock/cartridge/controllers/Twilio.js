@@ -32,7 +32,7 @@ server.post('Subscribe',
         var formProduct = req.form.product;
         var formPhone = req.form.phone;
 
-        // Store transaction as a reusable function
+        // Store transaction in a reusable function
         
         var type = 'NotifyMeBackInStock';
         var keyValue = formProduct;
@@ -46,28 +46,25 @@ server.post('Subscribe',
                     });
                 } else {
                     var backInStockObject = CustomObjectMgr.createCustomObject(type, keyValue);
+                    backInStockObject.custom.phoneNumbers = formPhone;
                     res.json({
                         success: true,
                         msg: Resource.msg('message.backInStock.success', 'common', null)
                     });                               
                 }
-
-                backInStockObject.custom.phoneNumbers = formPhone;
             });
         }
-        
-        // Proceed if custom objects already exist
+
+        // Check if custom objects already exist
 
         var allObjects = CustomObjectMgr.getAllCustomObjects(type); 
         var currentObject = CustomObjectMgr.getCustomObject(type, keyValue);
-        var error = false;
 
         while (allObjects.hasNext()) {  
 
-            // Iterate all objects to see if any object exists for current product
+            // Check if any existing object matches current product
             var currentObjectProductId = allObjects.next().getCustom().productId;  
             
-            // If yes
             if (currentObjectProductId === formProduct) {                          
                 var currentObjectPhoneNumbers = currentObject.getCustom().phoneNumbers; 
                 var mergedPhoneNumbers = currentObjectPhoneNumbers + "," + formPhone; // Merge new with existing
@@ -84,26 +81,26 @@ server.post('Subscribe',
                         });                         
                     });
                 } catch (error) {
-                    error = true;
-                };  
-
-                // If no, just store new data
-                } else {                                                          
-                try {
-                    transaction();
-                } catch (error) {
-                    error = true;
-                };  
+                    res.json({
+                        error: true,
+                        msg: Resource.msg('message.backInStock.error', 'common', null)
+                    });
+                };   
             }            
         }
 
-        // Create new custom object if none exists
+        // Create new custom object if none exists or exising CO does not match product
 
-        try {
-            transaction();
-        } catch (error) {
-            error = true;
-        };         
+        if (currentObject === null || currentObjectProductId !== formProduct) {
+            try {
+                transaction();
+            } catch (error) {
+                res.json({
+                    error: true,
+                    msg: Resource.msg('message.backInStock.error', 'common', null)
+                });
+            };         
+        }
         
         return next();
 });
