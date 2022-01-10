@@ -1,4 +1,4 @@
-<!-- Show 'Notify Back in Stock' button to bundle master product in bundles -->
+<!-- Show 'Notify Back in Stock' button to encompassing product in bundles -->
 
 <div class="row">
     <isinclude template="product/components/availability" />

@@ -2,8 +2,9 @@
 
 /**
  * Displays the returned message fron controller for success or error.
- * @param {string} data - data returned from the ajax call
- * @param {Object} buttonElement - button that was clicked for signing-up
+ * Disables the submit button for a duration.
+ * @param {Object} data - data returned from the ajax call
+ * @param {element} buttonElement - button that was clicked for signing-up
  */
 
 function displayMessage(data, buttonElement) {
@@ -30,10 +31,10 @@ function displayMessage(data, buttonElement) {
 }
 
 /**
- * Ajax POST call to the controller with the collected form data as JSON. * 
- * Receives back from controller success/error states and respective msg and gives them to displayMessage for showing on the 
- * front-end.
- * @param {string} data - Response from the controller
+ * Takes form data, validates the phone and makes an Ajax POST call to the controller with the collected data.
+ * Receives back from controller the success/error states and respective messages and gives them to displayMessage function for displaying on the front-end.
+ * @param {Object} data - Response from the controller
+ * @param {element} buttonElement - button that was clicked for signing-up
  */
 
 module.exports = {
@@ -56,14 +57,14 @@ module.exports = {
                     type: 'post',
                     dataType: 'json',
                     data: formElement.serialize(),
-                    success: function (data) {                          
+                    success: (data) => {
                         displayMessage(data, buttonElement);
                         if (data.success) {
                             $('.back-in-stock-form').trigger('reset');
                             $('#backInStockModal').modal('hide');
                         }
                     },
-                    error: function (err) {                             
+                    error: (err) => {
                         displayMessage(err, buttonElement);
                     }
                 });

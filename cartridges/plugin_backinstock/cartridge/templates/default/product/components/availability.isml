@@ -33,7 +33,7 @@
     </ul>
 </div>
 
-<!-- Modal -->
+<!-- Notify Back in Stock - Modal -->
 <isif condition="${!product.available}">
     <div class="modal fade" id="backInStockModal" tabindex="-1" role="dialog" aria-labelledby="backInStockLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
