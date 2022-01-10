@@ -42,14 +42,14 @@ server.post('Subscribe',
         var type = 'NotifyMeBackInStock';
         var keyValue = formProduct;
 
-        var transaction = () => {                                           
+        var transaction = () => {
             Transaction.wrap(function() {
                 if (!formProduct) {
                     res.json(jsonError);
                 } else {
                     var backInStockObject = CustomObjectMgr.createCustomObject(type, keyValue);
                     backInStockObject.custom.phoneNumbers = formPhone;
-                    res.json(jsonSuccess);                               
+                    res.json(jsonSuccess);
                 }
             });
         }
@@ -62,7 +62,7 @@ server.post('Subscribe',
         while (allObjects.hasNext()) {  
             var currentObjectProductId = allObjects.next().getCustom().productId;  
             
-            if (currentObjectProductId === formProduct) {                          
+            if (currentObjectProductId === formProduct) {
                 var currentObjectPhoneNumbers = currentObject.getCustom().phoneNumbers; 
                 var mergedPhoneNumbers = currentObjectPhoneNumbers + "," + formPhone; // Merge new with existing
                 var filteredPhoneNumbers = Array.from(new Set(mergedPhoneNumbers.split(','))).toString(); // Remove duplicates
@@ -70,7 +70,7 @@ server.post('Subscribe',
                 try {
                     Transaction.wrap(function() {
                         currentObject.custom.phoneNumbers = filteredPhoneNumbers; // Store old data merged with new data 
-                        res.json(jsonSuccess);                        
+                        res.json(jsonSuccess);
                     });
                 } catch (error) {
                     res.json(jsonError);
