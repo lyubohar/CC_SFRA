@@ -1,8 +1,5 @@
 /**
- * Query all custom objects with id = 'NotifyMeBackInStock'. Loop them and check the product availability. If the product is 
- * back in stock, make a service call to Twilio API for all phone numbers stored in that custom objects. When process finished 
- * successfully, delete the custom object.
- * 
+ * Query all custom objects with id = 'NotifyMeBackInStock'. Loop them and check the product availability. If the product is back in stock, make a service call to Twilio API for all phone numbers stored in that custom objects. When process finished successfully, delete the custom object.
  * Handles Twilio service. Sends request as body (x-www-form-urlencoded format) and gets response.
  * @returns {String} - returns string with data to be sent to the Twilio API for processing.
 */
@@ -17,7 +14,7 @@ module.exports.execute = function () {
     var allObjects = CustomObjectMgr.getAllCustomObjects(type);
     var error = false;
 
-    // Iterate through objects
+// Iterate through objects
     
     while (allObjects !== null && allObjects.hasNext()) {                   
         var currentObject = allObjects.next();
@@ -53,7 +50,7 @@ module.exports.execute = function () {
         }    
     }
     
-    // Delete custom objects
+// Delete custom objects
             
     function deleteCustomObjects() {
         try {

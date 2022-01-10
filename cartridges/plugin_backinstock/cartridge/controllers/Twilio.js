@@ -7,13 +7,13 @@
 var server = require('server');
 
 /**
- * Twilio-Subscribe : This endpoint is called to submit the registration for the Notify When Back In Stock functionality.
+ * Twilio-Subscribe : This endpoint is called to submit the registration for the 'Notify When Back In Stock' functionality.
+ * Takes form values from Ajax call and stores them in custom object with a transaction.
+ * Checks for existing custom object for the same product and either makes a new one, or adds to the existing.
  * @name Base/Twilio-Subscribe
  * @function
  * @memberof Twilio
  * @param {middleware} - server.middleware.https
- * @param {httpparameter} - formProduct - ID of the product
- * @param {httpparameter} - formPhone - Phone of the shopper
  * @param {category} - sensitive
  * @param {returns} - json
  * @param {serverfunction} - post
@@ -27,17 +27,17 @@ server.post('Subscribe',
         var CustomObjectMgr = require('dw/object/CustomObjectMgr');
         var error = false;
 
-        // Take form values from Ajax call
+    // Take form values from Ajax call
 
         var formProduct = req.form.product;
         var formPhone = req.form.phone;
 
-        // Reusable json error/success states
+    // Reusable json error/success states
 
         var jsonSuccess = { success: true, msg: Resource.msg('message.backInStock.success', 'common', null) };
         var jsonError = { error: true, msg: Resource.msg('message.backInStock.error', 'common', null) };
 
-        // Store transaction in a reusable function
+    // Store transaction in a reusable function
         
         var type = 'NotifyMeBackInStock';
         var keyValue = formProduct;
@@ -54,7 +54,7 @@ server.post('Subscribe',
             });
         }
 
-        // Check if custom objects already exist and if matches current product
+    // Check if custom objects already exist and if matches current product
 
         var allObjects = CustomObjectMgr.getAllCustomObjects(type); 
         var currentObject = CustomObjectMgr.getCustomObject(type, keyValue);
@@ -78,7 +78,7 @@ server.post('Subscribe',
             }            
         }
 
-        // Create new custom object if none exists or exising CO does not match product
+    // Create new custom object if none exists or exising CO does not match product
 
         if (currentObject === null || currentObjectProductId !== formProduct) {
             try {
