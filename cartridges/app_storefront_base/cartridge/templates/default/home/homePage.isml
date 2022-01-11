@@ -10,13 +10,13 @@
         <isslot id="home-main-m" description="Main home page slot." context="global" />
     </div>
     
-    <iscomment> <div class="container home-product-tiles homepage">
+    <div class="container home-product-tiles homepage">
         <div class="hp-product-grid" itemtype="http://schema.org/SomeProducts" itemid="#product">
             <isslot id="_home-main-lyubo-slot" description="Homework/playground slot." context="global" />
         </div>     
-    </div>    </iscomment>
+    </div>    
 
-    <iscomment> <div class="container home-product-tiles homepage">
+     <div class="container home-product-tiles homepage">
         <div class="hp-product-grid" itemtype="http://schema.org/SomeProducts" itemid="#product">
             <isscript>
                 var ContentMgr = require('dw/content/ContentMgr');
@@ -32,9 +32,9 @@
                 <isprint value="${contentAssetGuest.custom.body}" encoding="off" />
             </isif>
         </div>     
-    </div> </iscomment>
+    </div> 
 
-    <iscomment> <isinclude url="${URLUtils.url('Tips-Show')}" /> </iscomment>
+    <isinclude url="${URLUtils.url('Tips-Show')}" />
 
     <div class="container home-categories homepage">
         <div class="row home-main-categories no-gutters">            
