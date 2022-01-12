@@ -69,13 +69,18 @@ module.exports = {
                     }
                 });
 
-                $('.invalid-feedback').replaceWith('<div class="invalid-feedback"></div>');
             } else {
                 $(phoneElement)
                     .addClass('is-invalid')
                     .siblings('.invalid-feedback')
-                    .css(display, block);
+                    .css('display', 'block');
             }
+
+        });
+        
+        $('.availability-msg .btn').click(function() {                  // Reset validation errors when modal reopens
+            $('.invalid-feedback').css('display', 'none');
+            $('#phone').removeClass('is-invalid');
         });
     }
 };
