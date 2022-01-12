@@ -1,0 +1,22 @@
+{
+  "name": "Video Tile",
+  "description": "Select a YouTube video that you want to insert into your layout component",
+  "group": "commerce_assets",
+  "attribute_definition_groups": [
+    {
+      "id": "videoTile",
+      "name": "YouTube Video Tile",
+      "description": "This is a simple Video Tile component where you show YouTube video by providing YouTube ID.",
+      "attribute_definitions": [
+        {
+          "id": "id",
+          "name": "YouTube ID",
+          "description": "The id of the YouTube video to be shown.",
+          "type": "string",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "region_definitions": []
+}
