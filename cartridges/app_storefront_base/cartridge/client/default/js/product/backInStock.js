@@ -75,7 +75,6 @@ module.exports = {
                     .siblings('.invalid-feedback')
                     .css('display', 'block');
             }
-
         });
         
         $('.availability-msg .btn').click(function() {                  // Reset validation errors when modal reopens
