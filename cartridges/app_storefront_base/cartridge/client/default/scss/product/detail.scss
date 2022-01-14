@@ -205,19 +205,3 @@ label.availability {
         }
     }
 }
-
-// Notify when back in stock CSS
-
-.back-in-stock-message {
-    position: fixed;
-    top: 15%;
-    left: 50vw; // use vw to compensate for scroller and avoid jumping
-    transform: translateX(-50%);
-    z-index: 2000;
-    .back-in-stock-alert {
-        padding: 15px 25px;
-        border-radius: 5px;
-        animation: fade 5s linear forwards;
-        box-shadow: 1px 1px 5px grey;
-    }    
-}
