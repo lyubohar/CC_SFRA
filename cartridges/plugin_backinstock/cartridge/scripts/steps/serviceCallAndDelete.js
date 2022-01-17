@@ -32,7 +32,7 @@ module.exports.execute = function () {
                         createRequest: function(svc) {
                             svc.addHeader('Content-Type', 'application/x-www-form-urlencoded');
                             var phoneFrom = '13048496496';
-                            var smsBody = Resource.msg('message.backInStock.bodystart', 'common', null) + currentProduct.name + Resource.msg('message.backInStock.bodyend', 'common', null)
+                            var smsBody = Resource.msg('message.backInStock.bodystart', 'common', null) + currentProduct.name + Resource.msg('message.backInStock.bodyend', 'common', null);
                             var requestString = 'To=%2B' + phoneTo + '&From=%2B' + phoneFrom + '&Body=' + smsBody;
         
                             return requestString;
