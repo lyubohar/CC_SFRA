@@ -18,13 +18,14 @@ module.exports.execute = function () {
         var currentObject = allObjects.next();
         var currentObjectProductId = currentObject.getCustom().productId;
         var currentProduct = ProductMgr.getProduct(currentObjectProductId);
+        var currentProductName = ProductMgr.getProduct(currentObjectProductId).name;
         var currentProductAvailability = currentProduct.getAvailabilityModel().isInStock();
         var phonesArray = currentObject.getCustom().phoneNumbers.split(',');
 
         if (currentProductAvailability === true) {                          // Check for product availability
 
             phonesArray.forEach(function (phoneTo) {                        // Iterate through phone numbers
-                twilioService.backInStockService(currentProduct, phoneTo);
+                twilioService.backInStockService(currentProductName, phoneTo);
             });
 
             try {                                                           // Delete custom objects

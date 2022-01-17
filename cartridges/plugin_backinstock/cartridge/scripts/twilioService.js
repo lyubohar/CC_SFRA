@@ -7,14 +7,14 @@
 
 var Resource = require('dw/web/Resource');
 
-function backInStockService(argCurrentProduct, argPhoneTo) {                             
+function backInStockService(argCurrentProductName, argPhoneTo) {                             
     var localServiceRegistry = dw.svc.LocalServiceRegistry;
     var smsTwilioService = localServiceRegistry.createService("plugin_backinstock.http.twilio.sms", {
     
         createRequest: function(svc) {
             svc.addHeader('Content-Type', 'application/x-www-form-urlencoded');
             var phoneFrom = '13048496496';
-            var smsBody = Resource.msg('message.backInStock.bodystart', 'common', null) + argCurrentProduct.name + Resource.msg('message.backInStock.bodyend', 'common', null);
+            var smsBody = Resource.msg('message.backInStock.bodystart', 'common', null) + argCurrentProductName + Resource.msg('message.backInStock.bodyend', 'common', null);
             var requestString = 'To=%2B' + argPhoneTo + '&From=%2B' + phoneFrom + '&Body=' + smsBody;
 
             return requestString;
