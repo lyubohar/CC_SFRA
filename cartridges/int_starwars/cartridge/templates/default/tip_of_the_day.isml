@@ -1,0 +1,6 @@
+<!---Extend homePage.isml with StarWars Tip of the Day element--->
+
+<div class="container swapi-homework">
+    <h2 class="text-center"><strong>Star Wars tip of the day:</strong></h2>
+    <h2 class="text-center">${pdict.name}, ${pdict.manufacturer}, ${pdict.classification}</h2>
+</div>
