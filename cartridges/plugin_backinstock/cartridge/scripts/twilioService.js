@@ -13,7 +13,7 @@ function backInStockService(argCurrentProductName, argPhoneTo) {
     
         createRequest: function(svc) {
             svc.addHeader('Content-Type', 'application/x-www-form-urlencoded');
-            var phoneFrom = '13048496496';
+            var phoneFrom = '16067140692';
             var smsBody = Resource.msg('message.backInStock.bodystart', 'common', null) + argCurrentProductName + Resource.msg('message.backInStock.bodyend', 'common', null);
             var requestString = 'To=%2B' + argPhoneTo + '&From=%2B' + phoneFrom + '&Body=' + smsBody;
 
