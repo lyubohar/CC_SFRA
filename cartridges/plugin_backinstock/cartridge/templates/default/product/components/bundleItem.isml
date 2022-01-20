@@ -1,0 +1,107 @@
+<div class="container product-detail bundle-item" data-pid="${product.id}">
+    <div class="row">
+        <div class="col-12">
+            <!---Breadcrumbs--->
+            <div class="product-breadcrumb d-md-none">
+                <isinclude template="components/breadcrumbs/pageBreadcrumbs"/>
+            </div>
+
+            <!-- Product Name -->
+            <div class="row">
+                <div class="d-md-none col-sm-12">
+                    <h1 class="product-name">${product.productName}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Product Images Carousel -->
+        <isinclude template="product/components/imageCarousel" />
+
+        <div class="col-12 col-sm-6">
+            <!-- Product Name -->
+            <div class="row">
+                <div class="col">
+                    <h1 class="product-name hidden-sm-down">${product.productName}</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <isinclude template="product/components/pidRating" />
+                </div>
+            </div>
+
+            <div class="attributes">
+                <!-- Attributes and Quantity -->
+                <isinclude template="product/components/mainAttributes" />
+
+                <isloop items="${product.variationAttributes}" var="attr" status="attributeStatus">
+                    <div data-attr="${attr.id}" class="row swatch">
+                        <div class="col">
+                            <isinclude template="product/components/variationAttribute" />
+                        </div>
+                    </div>
+                </isloop>
+
+
+                <!-- Size Chart -->
+                <isif condition="${product.variationAttributes && product.sizeChartId}">
+                    <div class="row">
+                        <span class="col-12 col-md-10 size-chart">
+                        <isinclude template="product/components/sizeChart" />
+                    </span>
+                    </div>
+                </isif>
+
+                <!-- Product Options -->
+                <isif condition="${product.options.length}">
+                    <isloop items="${product.options}" var="option">
+                        <div class="row">
+                            <div class="col">
+                                <isif condition="${option.selectedValueId !== ''}">
+                                    <isinclude template="product/components/optionStatic" />
+                                </isif>
+                            </div>
+                        </div>
+                    </isloop>
+                </isif>
+
+                <!-- Product Availability -->
+                <div class="row availability product-availability" data-ready-to-order="${product.readyToOrder}" data-available="${product.available}">
+                    <div class="col-4">
+                        <span class="availability non-input-label">
+                            ${Resource.msg('label.availability', 'common', null)}:
+                        </span>
+                    </div>
+                    <div class="col-8">
+                        <ul class="list-unstyled availability-msg">
+                            <li>
+                                <isif condition="${!product.readyToOrder}">
+                                    <div>${Resource.msg('info.selectforstock', 'product', 'Select Styles for Availability')}</div>
+                                <iselse>
+                                    <isloop items="${product.availability.messages}" var="message">
+                                        <div>${message}</div>
+                                    </isloop>
+                                </isif>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <isinclude template="product/components/quantityStatic">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

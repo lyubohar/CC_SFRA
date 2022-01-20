@@ -1,0 +1,12 @@
+{
+    "step-types": {
+        "script-module-step":
+        [
+            {
+                "@type-id":"custom.serviceCallAndDelete",
+                "description":"Query all custom objects with id = 'NotifyMeBackInStock'. Loop them and check the product availability. If the product is back in stock, make a service call to Twilio API for all phone numbers stored in that custom objects. When process finished successfully, delete the custom object.",
+                "module":"plugin_backinstock/cartridge/scripts/steps/serviceCallAndDelete" 
+            }
+        ]
+    }
+}

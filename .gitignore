@@ -3,5 +3,6 @@ dw.json
 cartridges/app_storefront_base/cartridge/static
 cartridges/app_storefront_homework_playground/cartridge/static/
 cartridges/int_starwars/cartridge/static/
+cartridges/plugin_backinstock/cartridge/static/
 .vscode/launch.json
 rvw_developers_core

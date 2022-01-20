@@ -1,0 +1,5 @@
+<!-- Show 'Notify Back in Stock' button to encompassing product in bundles -->
+
+<div class="row">
+    <isinclude template="product/components/availability" />
+</div>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">
+
+    <job job-id="BackInStockJob" priority="0">
+        <description>Query all custom objects with id = 'NotifyMeBackInStock'. Loop them and check the product availability. 
+If the product is back in stock, make a service call to Twilio API for all phone numbers stored in that custom objects. 
+When process finished successfully, delete the custom object.</description>
+        <parameters/>
+        <flow>
+            <context site-id="RefArchGlobal"/>
+            <step step-id="serviceCallAndDelete" type="custom.serviceCallAndDelete" enforce-restart="false">
+                <description/>
+                <parameters/>
+                <rules>
+                    <on-exit status="ERROR">
+                        <stop-job/>
+                    </on-exit>
+                </rules>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-recurring enabled="true">
+                <recurrence>
+                    <date-from>2022-01-07Z</date-from>
+                    <date-to>2022-02-28Z</date-to>
+                    <start-time>05:00:00.000Z</start-time>
+                    <interval>12h</interval>
+                    <day-of-week/>
+                </recurrence>
+            </run-recurring>
+        </triggers>
+    </job>
+
+</jobs>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library xmlns="http://www.demandware.com/xml/impex/library/2006-10-31" library-id="RefArchSharedLibrary">
+    <content content-id="back-in-stock-title">
+        <display-name xml:lang="x-default">Notify when back in stock - title</display-name>
+        <description xml:lang="x-default">Content for the heading of the 'Notify me when back' modal window.</description>
+        <description xml:lang="fr">Content for the heading of the 'Notify me when back' modal window.</description>
+        <description xml:lang="it">Content for the heading of the 'Notify me when back' modal window.</description>
+        <online-flag>true</online-flag>
+        <searchable-flag>false</searchable-flag>
+        <page-attributes/>
+        <custom-attributes>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h2&gt;Please, fill your phone number to subscribe for notification.&lt;/h2&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="fr">&lt;h2&gt;S'il vous plaît, remplissez votre numéro de téléphone pour vous abonner à la notification.&lt;/h2&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="it">&lt;h2&gt;Per favore, inserisci il tuo numero di telefono per iscriverti alla notifica.&lt;/h2&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;h2&gt;Per favore, inserisci il tuo numero di telefono per iscriverti alla notifica.&lt;/h2&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h2&gt;通知を購読するには、電話番号を入力してください。&lt;/h2&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h2&gt;请填写您的电话号码以订阅通知。&lt;/h2&gt;</custom-attribute>
+        </custom-attributes>
+    </content>
+
+</library>
