@@ -117,7 +117,7 @@
   "paths": {
     "base": "./cartridges/app_storefront_base/"
   },  
-  "packageName": "plugin_backinstock",
+  "packageName": "app_storefront_homework_playground",
   "babel": {
     "presets": [
       "env"
