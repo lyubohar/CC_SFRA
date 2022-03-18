@@ -5,36 +5,15 @@
         assets.addCss('/css/homePage.css');
     </isscript>
 
-    <!-- +1.888.555.0199 --><!--This phone is a requirement to support existing Gomez monitor of SiteGenesis. Demadware customers can remove this.-->
     <div class="home-main homepage">
         <isslot id="home-main-m" description="Main home page slot." context="global" />
     </div>
     
-    <iscomment> <div class="container home-product-tiles homepage">
+    <div class="container home-product-tiles homepage">
         <div class="hp-product-grid" itemtype="http://schema.org/SomeProducts" itemid="#product">
             <isslot id="_home-main-lyubo-slot" description="Homework/playground slot." context="global" />
         </div>     
-    </div>    </iscomment>
-
-    <iscomment> <div class="container home-product-tiles homepage">
-        <div class="hp-product-grid" itemtype="http://schema.org/SomeProducts" itemid="#product">
-            <isscript>
-                var ContentMgr = require('dw/content/ContentMgr');
-                var contentAssetGuest = ContentMgr.getContent('1_lyubo_test_asset_guest-users')  
-                var contentAssetLoggedIn = ContentMgr.getContent('1_lyubo_test_asset_loggedin-users') 
-
-                var contentAssetPlaceholder = StringUtils.format(contentAssetLoggedIn.custom.body, customer.profile.firstName);
-            </isscript>
-            
-            <isif condition="${customer.authenticated}">
-                <isprint value="${contentAssetPlaceholder}" encoding="off" />
-            <iselse/>
-                <isprint value="${contentAssetGuest.custom.body}" encoding="off" />
-            </isif>
-        </div>     
-    </div> </iscomment>
-
-    <iscomment> <isinclude url="${URLUtils.url('Tips-Show')}" /> </iscomment>
+    </div>
 
     <div class="container home-categories homepage">
         <div class="row home-main-categories no-gutters">            
@@ -47,9 +26,6 @@
             <isslot id="home-products-m" description="Product tiles on the home page." context="global" />
         </div>
     </div>
-
-    <iscomment> <div>${pdict.some_dummy_key}</div>
-    <div>${pdict.some_dummy_key2}</div> </iscomment>
 
     <div class="homepage shop-the-style">
         <isslot id="home-product-set-m" description="Link to a Product Set." context="global" />
