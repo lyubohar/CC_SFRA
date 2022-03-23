@@ -1,0 +1,32 @@
+<isdecorate template="common/layout/page">
+
+<isscript>
+    var URLUtils = require('dw/web/URLUtils');
+    var ContentMgr = require('dw/content/ContentMgr');
+    var contentAsset = ContentMgr.getContent('_lyubo_confirmation_mail');
+    var contentAssetBody = contentAsset.custom.body.toString()
+
+    var regex = /\%%(.*?)\%%/g
+    var matches = contentAssetBody.match(regex)
+
+    var arr = []
+    for (var property in matches) {
+        arr.push(matches[property].replace(/\%%/g, ''))
+    }
+
+</isscript>
+
+<div class="container">
+    <div class="row homepage-product-listing">
+        <isif condition="${!empty(contentAsset) && contentAsset.isOnline()}">
+            <isprint value="${contentAssetBody}" encoding="off" /> 
+            <isloop items="${arr}" var="element" status="loopstatus">
+                <div class="col-6 col-sm-4">
+                    <isinclude url="${URLUtils.url('Tile-Show', 'pid', element, 'swatches', true, 'ratings', true)}" /> 
+                </div>  
+            </isloop>
+        </isif>
+    </div>
+</div>
+
+</isdecorate>          
