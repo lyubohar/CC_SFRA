@@ -1,0 +1,12 @@
+<isscript>
+    var ContentMgr = require('dw/content/ContentMgr');
+    var contentAsset = ContentMgr.getContent('_lyubo_pdp_additional_shipping');
+    var contentAssetBody = contentAsset.custom.body.toString()
+
+    var productIdPlaceholder = contentAssetBody.match(/\%%(.*?)\%%/g).toString()
+    var productIdStripped = productIdPlaceholder.replace(/\%%/g, '')
+</isscript>
+
+<isif condition="${product.id === productIdStripped}">
+    <div style="text-align: center; padding-top: 20px; color: red;"><strong>${product.additionalShipping}</strong></div>
+</isif>
