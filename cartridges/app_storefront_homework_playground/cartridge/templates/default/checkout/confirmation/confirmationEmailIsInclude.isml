@@ -1,0 +1,4 @@
+<div class="region col-6 col-sm-4">
+    <isinclude url="${URLUtils.url('Tile-Show', 'pid', elementStripped, 'swatches', true, 'ratings', true)}" />
+</div>
+

@@ -2,31 +2,29 @@
 
 <isscript>
     var URLUtils = require('dw/web/URLUtils');
+    var Template = require('dw/util/Template'); 
+    var HashMap = require('dw/util/HashMap');
     var ContentMgr = require('dw/content/ContentMgr');
     var contentAsset = ContentMgr.getContent('_lyubo_confirmation_mail');
+    var renderedTemplate = require('*/cartridge/scripts/helpers/confirmationEmail');
+
     var contentAssetBody = contentAsset.custom.body.toString()
+    var matches = contentAssetBody.match(/\%%(.*?)\%%/g)
 
-    var regex = /\%%(.*?)\%%/g
-    var matches = contentAssetBody.match(regex)
-
-    var arr = []
-    for (var property in matches) {
-        arr.push(matches[property].replace(/\%%/g, ''))
-    }
-
+    matches.forEach(function(element){
+        elementStripped = element.replace(/\%%/g, '')
+        contentAssetBody = contentAssetBody.replace(element, renderedTemplate)
+    })
 </isscript>
+
+${contentAssetBody} 
 
 <div class="container">
     <div class="row homepage-product-listing">
         <isif condition="${!empty(contentAsset) && contentAsset.isOnline()}">
-            <isprint value="${contentAssetBody}" encoding="off" /> 
-            <isloop items="${arr}" var="element" status="loopstatus">
-                <div class="col-6 col-sm-4">
-                    <isinclude url="${URLUtils.url('Tile-Show', 'pid', element, 'swatches', true, 'ratings', true)}" /> 
-                </div>  
-            </isloop>
+            <isprint value="${contentAssetBody}" encoding="off"/>
         </isif>
     </div>
 </div>
 
-</isdecorate>          
+</isdecorate>
