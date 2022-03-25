@@ -1,9 +1,6 @@
 <isdecorate template="common/layout/page">
 
 <isscript>
-    var URLUtils = require('dw/web/URLUtils');
-    var Template = require('dw/util/Template'); 
-    var HashMap = require('dw/util/HashMap');
     var ContentMgr = require('dw/content/ContentMgr');
     var contentAsset = ContentMgr.getContent('_lyubo_confirmation_mail');
     var renderedTemplate = require('*/cartridge/scripts/helpers/confirmationEmail');
@@ -17,12 +14,10 @@
     })
 </isscript>
 
-${contentAssetBody} 
-
 <div class="container">
     <div class="row homepage-product-listing">
         <isif condition="${!empty(contentAsset) && contentAsset.isOnline()}">
-            <isprint value="${contentAssetBody}" encoding="off"/>
+            <isprint value="${contentAssetBody}" encoding="off" />
         </isif>
     </div>
 </div>
