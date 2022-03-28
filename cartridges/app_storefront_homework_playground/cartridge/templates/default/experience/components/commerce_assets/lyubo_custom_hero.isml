@@ -11,7 +11,7 @@
                 <source srcset="${pdict.image.src.tablet}" media="(min-width: 768px)"/>
                 <source srcset="${pdict.image.src.desktop}" media="(min-width: 1024px)"/>
                 <isset name="imageName" value="${Resource.msg('pd.ITC.image.alt','pageDesigner',null)}" scope="page"/>
-                <a href="${pdict.link}" aria-label="${Resource.msgf('pd.ITC.image.link','pageDesigner', null, pdict.alt ? pdict.alt : imageName)}">
+                <a href="${pdict.link}" target="_blank" aria-label="${Resource.msgf('pd.ITC.image.link','pageDesigner', null, pdict.alt ? pdict.alt : imageName)}">
                     <img
                         class="image-fluid common-image-component ${pdict.heading ? 'common-image-filter' : ''}"
                         src="${pdict.image.src.mobile}"
@@ -26,7 +26,7 @@
                         <isprint value="${pdict.title ? pdict.title : ''}" encoding="off"/>
                     </h1>
                 </div>  
-                <div class="col-12 lyubo-hero__short-description">
+                <div class="col-12 lyubo-hero__short-description text-center">
                     <p>
                         <isprint value="${pdict.descr ? pdict.descr : ''}" encoding="off"/>
                     </p>
