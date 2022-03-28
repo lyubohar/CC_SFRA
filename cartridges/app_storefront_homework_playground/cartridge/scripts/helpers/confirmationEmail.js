@@ -2,7 +2,7 @@
 
 var Template = require('dw/util/Template'); 
 
-module.exports.render = function () {
-    return new Template('templates/default/checkout/confirmation/confirmationEmailIsInclude').render(elementStripped).text
+module.exports.render = function (productId) {
+    return new Template('templates/default/checkout/confirmation/confirmationEmailIsInclude').render(productId).text
 };
 

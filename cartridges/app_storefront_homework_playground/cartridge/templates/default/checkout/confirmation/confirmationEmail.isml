@@ -9,17 +9,15 @@
     var matches = contentAssetBody.match(/\%%(.*?)\%%/g)
 
     matches.forEach(function(element){
-        elementStripped = element.replace(/\%%/g, '')
-        contentAssetBody = contentAssetBody.replace(element, renderedTemplate)
+        productId = element.replace(/\%%/g, '')
+        contentAssetBody = contentAssetBody.replace(element, renderedTemplate.render(productId))
     })
 </isscript>
 
 <div class="container">
-    <div class="row homepage-product-listing">
-        <isif condition="${!empty(contentAsset) && contentAsset.isOnline()}">
-            <isprint value="${contentAssetBody}" encoding="off" />
-        </isif>
-    </div>
+    <isif condition="${!empty(contentAsset) && contentAsset.isOnline()}">
+        <isprint value="${contentAssetBody}" encoding="off" />
+    </isif>
 </div>
 
 </isdecorate>
