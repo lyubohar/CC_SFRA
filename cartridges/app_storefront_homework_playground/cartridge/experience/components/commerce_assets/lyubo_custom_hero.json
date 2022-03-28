@@ -1,0 +1,50 @@
+{
+    "name": "Lyubo Custom Hero",
+    "description": "Exercise hero component",
+    "group": "commerce_assets",
+    "attribute_definition_groups": [
+      {
+        "id": "ITCImage",
+        "attribute_definitions": [
+          {
+            "id": "title",
+            "name": "Title",
+            "type": "markup",
+            "required": true
+          },            
+          {
+            "id": "image",
+            "name": "Image",
+            "type": "image",
+            "required": true
+          },
+          {
+            "id": "alt",
+            "name": "Alt Text",
+            "description": "The image alt text shown by the component.",
+            "type": "string",
+            "required": false
+          },
+          {
+            "id": "ITCLink",
+            "name": "Image Link",
+            "type": "url",
+            "required": false
+          },
+          {
+            "id": "descr",
+            "name": "Short Description",
+            "type": "markup",
+            "required": true
+          },          
+          {
+            "id": "cta",
+            "name": "CTA",
+            "type": "markup",
+            "required": true
+          }
+        ]
+      }
+    ],
+    "region_definitions": []
+  }

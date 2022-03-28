@@ -1,0 +1,43 @@
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    assets.addCss('/css/experience/components/commerceAssets/imageAndTextCommon.css');
+    assets.addCss('/css/experience/components/commerceAssets/lyuboCustomHero.css');
+</isscript>
+
+<div class="row">
+    <div class="col-12">
+        <figure class="image-component">
+            <picture>
+                <source srcset="${pdict.image.src.tablet}" media="(min-width: 768px)"/>
+                <source srcset="${pdict.image.src.desktop}" media="(min-width: 1024px)"/>
+                <isset name="imageName" value="${Resource.msg('pd.ITC.image.alt','pageDesigner',null)}" scope="page"/>
+                <a href="${pdict.link}" aria-label="${Resource.msgf('pd.ITC.image.link','pageDesigner', null, pdict.alt ? pdict.alt : imageName)}">
+                    <img
+                        class="image-fluid common-image-component ${pdict.heading ? 'common-image-filter' : ''}"
+                        src="${pdict.image.src.mobile}"
+                        style="--focal-point-x:${pdict.image.focalPointX}; --focal-point-y:${pdict.image.focalPointY}"
+                        alt="${pdict.alt ? pdict.alt : imageName}" title="${pdict.alt ? pdict.alt : imageName}"
+                    />
+                </a>
+            </picture>
+            <figcaption>
+                <div class="lyubo-hero__title">
+                    <h1>
+                        <isprint value="${pdict.title ? pdict.title : ''}" encoding="off"/>
+                    </h1>
+                </div>  
+                <div class="col-12 lyubo-hero__short-description">
+                    <p>
+                        <isprint value="${pdict.descr ? pdict.descr : ''}" encoding="off"/>
+                    </p>
+                </div>
+                <div class="lyubo-hero__cta">
+                    <button>
+                        <isprint value="${pdict.cta ? pdict.cta : ''}" encoding="off"/>
+                    </button>
+                </div>                    
+            </figcaption>
+        </figure>
+    </div>
+</div>
+
