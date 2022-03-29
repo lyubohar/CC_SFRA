@@ -5,7 +5,15 @@ $(document).ready(function(){
         infinite: true,
         autoplay: true,
         autoplaySpeed: 2000,
-        slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        mobileFirst: true,
+        responsive: [{
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+          }
+        }]
     }); 
 });

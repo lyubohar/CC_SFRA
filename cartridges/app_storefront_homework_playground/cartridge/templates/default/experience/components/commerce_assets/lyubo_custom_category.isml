@@ -1,0 +1,31 @@
+<isscript>
+    var assets = require('*/cartridge/scripts/assets.js');
+    assets.addCss('/css/experience/components/commerceAssets/popularCategory.css');
+</isscript>
+
+<div class="image-cropper">
+    <a href="${pdict.category.url}">
+        <div class="image-wrapper"
+            <isif condition="${pdict.category.imageURL}">
+                style="background-image: url(${pdict.category.imageURL});
+                <isif condition="${pdict.category.imagesize}">
+                    background-size: ${pdict.category.imagesize};
+                </isif>
+                <isif condition="${pdict.category.position}">
+                    background-position: ${pdict.category.position};
+                </isif>
+            </isif>
+            <span class="background-image" role="img" aria-label="${pdict.category.name}"></span>
+        </div>
+    </a>
+</div>
+
+<div class="popular-category-link">
+    <a href="${pdict.category.url}" class="popular-category-label-a popular-cat-link">${pdict.category.name}</a>
+</div>
+<div class="col-12 lyubo-hero__short-description text-center">
+    <isprint value="${pdict.category.catShortDesc ? pdict.category.catShortDesc : ''}" encoding="off"/>
+</div>
+<div class="col-12 lyubo-hero__short-description text-center">
+    <isprint value="${pdict.category.cta ? pdict.category.cta : ''}" encoding="off"/>
+</div>

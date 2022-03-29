@@ -1,0 +1,53 @@
+{
+    "name": "Lyubo Custom Category Component",
+    "description": "Round Category Tile displayed with a circular image.",
+    "group": "commerce_assets",
+    "attribute_definition_groups": [
+        {
+            "id": "popularCategory",
+            "name": "Popular Category",
+            "description": "Specify the popular Category to be Displayed.",
+            "attribute_definitions": [
+                {
+                    "id": "category",
+                    "name": "Category",
+                    "description": "Select Category to be displayed.",
+                    "type": "category",
+                    "required": false
+                },
+                {
+                    "id": "categoryId",
+                    "name": "Category ID",
+                    "description": "Select Category ID for the category.",
+                    "type": "string",
+                    "required": false
+                },                
+                {
+                    "id": "catShortDesc",
+                    "name": "Category Short Description",
+                    "type": "markup",
+                    "required": true
+                },                
+                {
+                    "id": "cta",
+                    "name": "CTA",
+                    "type": "string",
+                    "required": false
+                },
+                {
+                    "id": "position",
+                    "name": "CTA Position",
+                    "description": "Position CTA on top or bottom of component.",
+                    "type": "enum",
+                    "values": [
+                        "1",
+                        "2"
+                    ],
+                    "default_value": "1",                    
+                    "required": false
+                }
+            ]
+        }
+    ],
+    "region_definitions": []
+}
