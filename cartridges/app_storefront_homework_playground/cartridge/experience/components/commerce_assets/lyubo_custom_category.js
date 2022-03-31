@@ -14,15 +14,14 @@ var ImageTransformation = require('*/cartridge/experience/utilities/ImageTransfo
  */
 module.exports.render = function (context, modelIn) {
     var model = modelIn || new HashMap();
-    var content = context.content;
+    var content = context.content; // fields in Page Designer/json
     model.textHeadline = content.textHeadline;
 
     var catObj = {};
-    var cat = content.category; 
+    var cat = content.category; // base cat object in database
     
     if (cat) {
         catObj.ID = cat.ID;     
-
         catObj.name = cat.displayName;
 
         if (content.catShortDesc) {

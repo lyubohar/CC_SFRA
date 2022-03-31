@@ -21,6 +21,6 @@
 <div class="lyubo-category__short-description text-center">
     <isprint value="${pdict.category.catShortDesc ? pdict.category.catShortDesc : ''}" encoding="off"/>
 </div>
-<div class="lyubo-category__cta text-center">
+<div class="lyubo-category__cta position-${pdict.category.position} text-center">
     <isprint value="${pdict.category.cta ? pdict.category.cta : ''}" encoding="off"/>
 </div>
