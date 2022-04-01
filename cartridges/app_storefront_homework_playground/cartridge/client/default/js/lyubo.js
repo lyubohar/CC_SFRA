@@ -1,53 +1,51 @@
 $(document).ready(function(){
     var slickElement = $('.lyubo-hero-carousel')
 
-    var xsDisplayIndicators = $(slickElement).hasClass('xs-display-indicators') ? true : false
-    var xsDisplayControls = $(slickElement).hasClass('xs-display-controls') ? true : false
-    var xsSlidesDisplay = $("[class^='xs-slides-display-']").attr('class') ? $("[class^='xs-slides-display-']").attr('class').split('-').pop() : 1
-    var xsSlidesScroll = $("[class^='xs-slides-scroll-']").attr('class') ? $("[class^='xs-slides-scroll-']").attr('class').split('-').pop() : 1
+    var xsDisplayIndicators = $(slickElement).attr('data-xs-indicators')
+    var xsDisplayControls = $(slickElement).attr('data-xs-controls')
+    var xsSlidesDisplay = $(slickElement).attr('data-xs-slides-display')
+    var xsSlidesScroll = $(slickElement).attr('data-xs-slides-scroll')
 
-    var smDisplayIndicators = $(slickElement).hasClass('sm-display-indicators') ? true : false
-    var smDisplayControls = $(slickElement).hasClass('sm-display-controls') ? true : false
-    var smSlidesDisplay = $("[class^='sm-slides-display-']").attr('class') ? $("[class^='sm-slides-display-']").attr('class').split('-').pop() : 2
-    var smSlidesScroll = $("[class^='sm-slides-scroll-']").attr('class') ? $("[class^='sm-slides-scroll-']").attr('class').split('-').pop() : 2
+    var smDisplayIndicators = $(slickElement).attr('data-sm-indicators')
+    var smDisplayControls = $(slickElement).attr('data-sm-controls')
+    var smSlidesDisplay = $(slickElement).attr('data-sm-slides-display')
+    var smSlidesScroll = $(slickElement).attr('data-sm-slides-scroll')
 
-    var mdDisplayIndicators = $(slickElement).hasClass('md-display-indicators') ? true : false
-    var mdDisplayControls = $(slickElement).hasClass('md-display-controls') ? true : false
-    var mdSlidesDisplay = $("[class^='md-slides-display-']").attr('class') ? $("[class^='md-slides-display-']").attr('class').split('-').pop() : 3
-    var mdSlidesScroll = $("[class^='md-slides-scroll-']").attr('class') ? $("[class^='md-slides-scroll-']").attr('class').split('-').pop() : 3
+    var mdDisplayIndicators = $(slickElement).attr('data-md-indicators')
+    var mdDisplayControls = $(slickElement).attr('data-md-controls')
+    var mdSlidesDisplay = $(slickElement).attr('data-md-slides-display')
+    var mdSlidesScroll = $(slickElement).attr('data-md-slides-scroll')
 
-    var currentWidth = $(window).width();
-    console.log(currentWidth)
+    var currentWidth = $(window).width()
     
-    $(window).on('resize', function() {
+    $(window).resize(function() {
         var dynamicWidth = $(window).width();
         
-        if (currentWidth < 544 && dynamicWidth < 544) {
+        if (currentWidth < 544 || dynamicWidth < 544) {
             var prefix = 'xs'
-        } else if (currentWidth < 992 && dynamicWidth < 992) {
+        } else if (currentWidth < 992 || dynamicWidth < 992) {
             var prefix = 'sm'
         } else {
             var prefix = 'md'
         }
-    });
+        console.log(prefix)
+    }).resize();
 
-    $(slickElement).slick({
-        arrows: mdDisplayIndicators,
-		dots: mdDisplayControls,
+
+    console.log(mdSlidesScroll)
+    var column = parseInt(mdSlidesScroll)
+    var test = parseInt(mdDisplayIndicators)
+
+    slickElement.slick({
+        arrows: test,
+        dots: mdDisplayControls,
         slidesToShow: mdSlidesDisplay,
-        slidesToScroll: mdSlidesScroll,
+        slidesToScroll: 1,
         speed: 400,
         infinite: true,
         autoplay: true,
         autoplaySpeed: 2000,
         mobileFirst: true
     });
-
-    console.log('xs-disp: ' + xsSlidesDisplay)
-    console.log('xs-scroll: ' + xsSlidesScroll)
-    console.log('sm-disp: ' + smSlidesDisplay)
-    console.log('sm-scroll: ' + smSlidesScroll)
-    console.log('md-disp: ' + mdSlidesDisplay)
-    console.log('md-scroll: ' + mdSlidesScroll)
 });
 

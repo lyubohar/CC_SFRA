@@ -12,29 +12,29 @@ var PageRenderHelper = require('*/cartridge/experience/utilities/PageRenderHelpe
 
 function init(model, context) {
     model.regions = PageRenderHelper.getRegionModelRegistry(context.component);
+
     var carouselElement = model.regions.slides
-    var pd = context.content
+    var content = context.content
+    
+    carouselElement
+        .setClassName('lyubo-hero-carousel')
+        
+        .setAttribute('data-xs-indicators', content.xsCarouselIndicators)
+        .setAttribute('data-xs-controls', content.xsCarouselControls)
+        .setAttribute('data-xs-slides-display', content.xsCarouselSlidesToDisplay)
+        .setAttribute('data-xs-slides-scroll', content.xsCarouselSlidesToScroll)
 
-    var xsDisplayIndicators = pd.xsCarouselIndicators ? ' xs-display-indicators' : ''
-    var xsDisplayControls = pd.xsCarouselControls ? ' xs-display-controls' : ''
-    var xsSlidesDisplay = pd.xsCarouselSlidesToDisplay ? ' xs-slides-display-' + pd.xsCarouselSlidesToDisplay : ''
-    var xsSlidesScroll = pd.xsCarouselSlidesToScroll ? ' xs-slides-scroll-' + pd.xsCarouselSlidesToScroll : ''
+        .setAttribute('data-sm-indicators', content.smCarouselIndicators)
+        .setAttribute('data-sm-controls', content.smCarouselControls)
+        .setAttribute('data-sm-slides-display', content.smCarouselSlidesToDisplay)
+        .setAttribute('data-sm-slides-scroll', content.smCarouselSlidesToScroll)
 
-    var smDisplayIndicators = pd.smCarouselIndicators ? ' sm-display-indicators' : ''
-    var smDisplayControls = pd.smCarouselControls ? ' sm-display-controls' : ''
-    var smSlidesDisplay = pd.smCarouselSlidesToDisplay ? ' sm-slides-display-' + pd.smCarouselSlidesToDisplay : ''
-    var smSlidesScroll = pd.smCarouselSlidesToScroll ? ' sm-slides-scroll-' + pd.smCarouselSlidesToScroll : ''
+        .setAttribute('data-md-indicators', content.mdCarouselIndicators)
+        .setAttribute('data-md-controls', content.mdCarouselControls)
+        .setAttribute('data-md-slides-display', content.mdCarouselSlidesToDisplay)
+        .setAttribute('data-md-slides-scroll', content.mdCarouselSlidesToScroll)
 
-    var mdDisplayIndicators = pd.mdCarouselIndicators ? ' md-display-indicators' : ''
-    var mdDisplayControls = pd.mdCarouselControls ? ' md-display-controls' : ''
-    var mdSlidesDisplay = pd.mdCarouselSlidesToDisplay ? ' md-slides-display-' + pd.mdCarouselSlidesToDisplay : ''
-    var mdSlidesScroll = pd.mdCarouselSlidesToScroll ? ' md-slides-scroll-' + pd.mdCarouselSlidesToScroll : ''
-
-    carouselElement.setClassName('lyubo-hero-carousel' + mdDisplayIndicators + mdDisplayControls + mdSlidesDisplay + mdSlidesScroll + smDisplayIndicators + smDisplayControls + smSlidesDisplay + smSlidesScroll + xsDisplayIndicators + xsDisplayControls + xsSlidesDisplay + xsSlidesScroll);
-
-    // carouselElement.setAttribute('test', pd.xsCarouselIndicators);
-
-    model.title = pd.textHeadline ? pd.textHeadline : null;
+    model.title = content.textHeadline ? content.textHeadline : null;
     return model;
 }
 
