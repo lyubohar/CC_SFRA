@@ -3,6 +3,7 @@ var breakpoints = require('./settings/breakpoints.json');
 $(document).ready(function(){
     var carouselElement = $('.lyubo-hero-carousel')
 
+    // Define data-attributes and set defaults
     var xsDisplayIndicators = $(carouselElement).attr('data-xs-indicators') === 'true' ? true : false
     var xsDisplayControls = $(carouselElement).attr('data-xs-controls') === 'true' ? true : false
     var xsSlidesDisplay = $(carouselElement).attr('data-xs-slides-display') ? Number($(carouselElement).attr('data-xs-slides-display')) : 1
@@ -18,6 +19,7 @@ $(document).ready(function(){
     var mdSlidesDisplay = $(carouselElement).attr('data-md-slides-display') ? Number($(carouselElement).attr('data-md-slides-display')) : 3
     var mdSlidesScroll = $(carouselElement).attr('data-md-slides-scroll') ? Number($(carouselElement).attr('data-md-slides-scroll')) : 1
     
+    // Set settings based on screen width
     if ($(window).width() < breakpoints.mobile) {
         var displayIndicators = xsDisplayIndicators
         var displayControls = xsDisplayControls
@@ -35,6 +37,7 @@ $(document).ready(function(){
         var slidesScroll = mdSlidesScroll
     }  
     
+    // Slick carousel
     function slickInit() {
         carouselElement.slick({
             arrows: displayIndicators,
@@ -56,7 +59,7 @@ $(document).ready(function(){
         // } else {
         //     prefix = 'md'
         // }
-        // carouselElement.slick("unslick")
-        // slickInit()
+        carouselElement.slick("unslick")
+        slickInit()
     }).resize()
 });
