@@ -1,6 +1,6 @@
 var breakpoints = require('./settings/breakpoints.json');
 
-$(document).ready(function(){
+$(document).ready(function () {
     var carouselElement = $('.lyubo-hero-carousel')
 
     // Define data-attributes and set defaults
@@ -18,48 +18,33 @@ $(document).ready(function(){
     var mdDisplayControls = $(carouselElement).attr('data-md-controls') === 'true' ? true : false
     var mdSlidesDisplay = $(carouselElement).attr('data-md-slides-display') ? Number($(carouselElement).attr('data-md-slides-display')) : 3
     var mdSlidesScroll = $(carouselElement).attr('data-md-slides-scroll') ? Number($(carouselElement).attr('data-md-slides-scroll')) : 1
-    
-    // Set settings based on screen width
-    if ($(window).width() < breakpoints.mobile) {
-        var displayIndicators = xsDisplayIndicators
-        var displayControls = xsDisplayControls
-        var slidesDisplay = xsSlidesDisplay
-        var slidesScroll = xsSlidesScroll    
-    } else if ($(window).width() < breakpoints.tablet) {
-        var displayIndicators = smDisplayIndicators
-        var displayControls = smDisplayControls
-        var slidesDisplay = smSlidesDisplay
-        var slidesScroll = smSlidesScroll    
-    } else {
-        var displayIndicators = mdDisplayIndicators
-        var displayControls = mdDisplayControls
-        var slidesDisplay = mdSlidesDisplay
-        var slidesScroll = mdSlidesScroll
-    }  
-    
-    // Slick carousel
-    function slickInit() {
-        carouselElement.slick({
-            arrows: displayIndicators,
-            dots: displayControls,
-            slidesToShow: slidesDisplay,
-            slidesToScroll: slidesScroll,
-            speed: 400,
-            infinite: true
-        });
-    }
-    slickInit()
 
-    $(window).resize(function() {
-        // var prefix 
-        // if ($(window).width() < breakpoints.mobile) {
-        //     prefix = 'xs'
-        // } else if ($(window).width() < breakpoints.tablet) {
-        //     prefix = 'sm'
-        // } else {
-        //     prefix = 'md'
-        // }
-        carouselElement.slick("unslick")
-        slickInit()
-    }).resize()
+    // Slick carousel
+    carouselElement.slick({
+        arrows: xsDisplayIndicators,
+        dots: xsDisplayControls,
+        slidesToShow: xsSlidesDisplay,
+        slidesToScroll: xsSlidesScroll,
+        speed: 400,
+        infinite: true,
+        mobileFirst: true,
+        responsive: [{
+            breakpoint: breakpoints.mobile,
+            settings: {
+                arrows: smDisplayIndicators,
+                dots: smDisplayControls,
+                slidesToShow: smSlidesDisplay,
+                slidesToScroll: smSlidesScroll
+            },
+        },
+        {
+            breakpoint: breakpoints.tablet,
+            settings: {
+                arrows: mdDisplayIndicators,
+                dots: mdDisplayControls,
+                slidesToShow: mdSlidesDisplay,
+                slidesToScroll: mdSlidesScroll
+            },
+        }],
+    });
 });
