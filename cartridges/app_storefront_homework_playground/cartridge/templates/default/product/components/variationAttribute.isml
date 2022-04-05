@@ -1,0 +1,29 @@
+<iscomment>
+
+Template Notes:
+
+- This template is intended to be referenced from an <isinclude> tag within an <isloop> in another
+  source template.  The <isloop> is expected to have a "status" attribute, named "attributeStatus".
+- ${attributeStatus.last} is checked to see whether a particular attribute row should include the
+  Quantity drop-down menu
+
+</iscomment>
+
+<div class="attribute">
+
+        <!-- Select <Attribute> Label -->
+        <label class="${attr.id}" for="${attr.id}-${loopState && loopState.count ? loopState.count : '1' }">
+            ${Resource.msg('label.select', 'common', null)} ${attr.displayName}
+        </label>
+
+        <!-- Attribute Values Drop Down Menu -->
+        <div class="select-${attr.id}" id="${attr.id}-${loopState && loopState.count ? loopState.count : '1' }" ${ product.productType === "variant" && isBundle ? "disabled" : "" }> 
+            <isloop items="${attr.values}" var="attrValue">
+                <label for="${attrValue.value}">${attrValue.value}</label>
+                <input type="radio" id="${attrValue.value}" name="${attr.id}" value="${attrValue.url}" data-attr-value="${attrValue.value}"
+                    ${!attrValue.selectable ? 'disabled' : ''}
+                    ${attrValue.selected ? 'selected' : ''}
+                >
+            </isloop>
+        </div>
+</div>

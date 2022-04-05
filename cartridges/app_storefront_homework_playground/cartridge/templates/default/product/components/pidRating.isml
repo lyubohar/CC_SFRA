@@ -1,0 +1,8 @@
+<div class="clearfix">
+    <!-- Product Rating -->
+    <div class="ratings pull-left">
+        <span class="sr-only">${Resource.msgf('label.product.ratings', 'common', null, product.rating)}</span>
+        <isinclude template="product/components/productRating" />
+    </div>
+</div>
+<div class="add-space add-border"></div>

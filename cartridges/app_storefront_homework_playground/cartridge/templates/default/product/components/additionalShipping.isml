@@ -8,5 +8,7 @@
 </isscript>
 
 <isif condition="${product.id === productIdStripped}">
-    <div style="text-align: center; padding-top: 20px; color: red;"><strong>${product.additionalShipping}</strong></div>
+    <div class="add-space text-center">
+        <isprint value="${product.additionalShipping}" encoding="off" />
+    </div>
 </isif>

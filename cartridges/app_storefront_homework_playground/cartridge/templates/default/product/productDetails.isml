@@ -3,7 +3,9 @@
     <isscript>
         var assets = require('*/cartridge/scripts/assets');
         assets.addJs('/js/productDetail.js');
+        assets.addJs('/js/temp.js');
         assets.addCss('/css/product/detail.css');
+        assets.addCss('/css/lyubo.css');
     </isscript>
 
     <isset name="product" value="${pdict.product}" scope="page" />
@@ -28,9 +30,6 @@
             </div>
 
             <div class="row">
-                <!-- Product Images Carousel -->
-                <isinclude template="product/components/imageCarousel" />
-
                 <div class="col-12 col-sm-6">
                     <!--Breadcrumbs-->
                     <div class="row">
@@ -39,6 +38,11 @@
                         </div>
                     </div>
 
+                    <!-- Product Images Carousel -->
+                    <isinclude template="product/components/imageCarousel" />
+                </div>
+
+                <div class="col-12 col-sm-6">
                     <!-- Product Name -->
                     <div class="row">
                         <div class="col">
@@ -46,10 +50,25 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-12">
+                            <!-- Prices -->
+                            <div class="prices text-left">
+                                <isset name="price" value="${product.price}" scope="page" />
+                                <isinclude template="product/components/pricing/main" />
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col">
                             <isinclude template="product/components/pidRating" />
+                        </div>
+                    </div>
+
+                    <div class="row description collapsible-xs <isif condition="${!product.shortDescription}">hidden-xs-down</isif>">
+                        <div class="col">
+                            <isinclude template="product/components/description" />
                         </div>
                     </div>
 
@@ -99,9 +118,6 @@
                             </div>
                         </isif>
 
-                        <!-- Product Availability -->
-                        <isinclude template="product/components/productAvailability" />
-
                         <!-- Applicable Promotions -->
                         <div class="row">
                             <div class="col-12 promotions">
@@ -110,28 +126,18 @@
                         </div>
 
                         <div class="prices-add-to-cart-actions">
-                            <div class="row">
-                                <div class="col-12">
-                                    <!-- Prices -->
-                                    <div class="prices">
-                                        <isset name="price" value="${product.price}" scope="page" />
-                                        <isinclude template="product/components/pricing/main" />
-                                    </div>
-                                </div>
-                            </div>
-
                             <!-- Cart and [Optionally] Apple Pay -->
                             <isinclude template="product/components/addToCartProduct" />
+                        </div>
 
-                            <!-- Additional shipping options -->
+                    </div>
+
+                    <!-- Additional shipping options -->
+                    <div class="row">
+                        <div class="col">
                             <isinclude template="product/components/additionalShipping" />
                         </div>
-
-                        <!-- Social Sharing Icons -->
-                        <div class="row">
-                            <isinclude template="product/components/socialIcons" />
-                        </div>
-                    </div>
+                    </div>                  
                 </div>
             </div>
 
