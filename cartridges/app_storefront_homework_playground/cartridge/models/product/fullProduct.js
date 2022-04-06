@@ -56,6 +56,7 @@ module.exports = function fullProduct(product, apiProduct, options) {
     decorators.pageMetaData(product, apiProduct);
     decorators.template(product, apiProduct);
     decorators.contentAttributes(product);
+    decorators.recommendations(product, apiProduct);
 
     return product;
 };

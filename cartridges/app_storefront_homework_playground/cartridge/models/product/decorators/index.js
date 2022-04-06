@@ -28,5 +28,6 @@ module.exports = {
     raw: require('*/cartridge/models/product/decorators/raw'),
     pageMetaData: require('*/cartridge/models/product/decorators/pageMetaData'),
     template: require('*/cartridge/models/product/decorators/template'),
-    contentAttributes: require('*/cartridge/models/product/decorators/contentAttributes')
+    contentAttributes: require('*/cartridge/models/product/decorators/contentAttributes'),
+    recommendations: require('*/cartridge/models/product/decorators/recommendations')
 };

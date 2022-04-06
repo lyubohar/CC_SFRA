@@ -1,0 +1,6 @@
+<h1 class="text-center add-space">You may also like: </h1>
+<isloop items="${product.recommendations}" var="recommendation">
+    <div class="col-6 col-sm-4 add-space">
+        <isinclude url="${URLUtils.url('Tile-Show', 'pid', recommendation.recommendedItem.ID, 'swatches', true, 'ratings', true)}" />
+    </div>
+</isloop>
