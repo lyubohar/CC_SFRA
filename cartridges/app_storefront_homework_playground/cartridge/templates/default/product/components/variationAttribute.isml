@@ -17,7 +17,7 @@ Template Notes:
         </label>
 
         <!-- Attribute Values Drop Down Menu -->
-        <div class="select-${attr.id}" id="${attr.id}-${loopState && loopState.count ? loopState.count : '1' }" ${ product.productType === "variant" && isBundle ? "disabled" : "" }> 
+        <div class="select-attribute select-${attr.id}" id="${attr.id}-${loopState && loopState.count ? loopState.count : '1' }" ${ product.productType === "variant" && isBundle ? "disabled" : "" }> 
             <isloop items="${attr.values}" var="attrValue">
                 <label for="${attrValue.value}">${attrValue.value}</label>
                 <input type="radio" id="${attrValue.value}" name="${attr.id}" value="${attrValue.url}" data-attr-value="${attrValue.value}"
