@@ -1,6 +1,9 @@
 var breakpoints = require('./settings/breakpoints.json');
+var processInclude = require('base/util');
 
 $(document).ready(function () {
+    processInclude(require('base/carousel'));
+
     var carouselElement = $('.lyubo-hero-carousel')
 
     // Define data-attributes and set defaults

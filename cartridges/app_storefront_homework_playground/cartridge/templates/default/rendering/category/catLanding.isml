@@ -4,8 +4,8 @@
         var assets = require('*/cartridge/scripts/assets');
         assets.addCss('/css/search.css');
 
-        assets.addJs('/js/lyubo.js');
-        assets.addCss('/css/lyubo.css');
+        assets.addJs('/js/carousel.js');
+        assets.addCss('/css/components/carousel.css');
         assets.addJs('//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js')
         assets.addCss('//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css')
         assets.addCss('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css')        

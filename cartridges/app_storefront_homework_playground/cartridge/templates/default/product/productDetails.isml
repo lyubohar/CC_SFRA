@@ -3,9 +3,7 @@
     <isscript>
         var assets = require('*/cartridge/scripts/assets');
         assets.addJs('/js/productDetail.js');
-        assets.addJs('/js/temp.js');
         assets.addCss('/css/product/detail.css');
-        assets.addCss('/css/lyubo.css');
     </isscript>
 
     <isset name="product" value="${pdict.product}" scope="page" />
