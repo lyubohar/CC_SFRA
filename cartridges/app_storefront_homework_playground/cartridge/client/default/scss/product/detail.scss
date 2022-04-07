@@ -1,0 +1,52 @@
+// @import "base/global";
+@import "base/product/detail.scss";
+
+// PDP exercise 
+
+.add-space {
+    margin-top: 20px;
+}
+
+.add-border {
+    border-top: 1px solid darkgrey;
+    padding-bottom: 20px;
+}
+
+.attributes {
+    padding: 0;
+}
+
+.select-attribute {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.select-attribute label {
+    display: flex;
+    border: 1px solid gray;
+    padding: 1px 4px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.select-attribute input {
+    visibility: hidden;
+}
+
+.carousel {
+    display: flex;
+}
+
+.carousel-inner {
+    overflow: initial;
+}
+
+.carousel-item {
+    display: block;
+    float: none;
+    width: 100px; 
+    margin-right: 0;
+    border: none;
+    background: 0;
+}
+
