@@ -21,9 +21,9 @@ module.exports = function fullProduct(product, apiProduct, options) {
     decorators.price(product, apiProduct, options.promotions, false, options.optionModel);
 
     if (options.variationModel) {
-        decorators.images(product, options.variationModel, { types: ['large', 'small'], quantity: 'all' });
+        decorators.images(product, options.variationModel, { types: ['large', 'small', 'thumbnail'], quantity: 'all' });
     } else {
-        decorators.images(product, apiProduct, { types: ['large', 'small'], quantity: 'all' });
+        decorators.images(product, apiProduct, { types: ['large', 'small', 'thumbnail'], quantity: 'all' });
     }
 
     decorators.quantity(product, apiProduct, options.quantity);

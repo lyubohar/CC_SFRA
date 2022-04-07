@@ -11,7 +11,7 @@ $('.carousel-item').click(function () {
 // Show large image on click of thumbnail
 $('.carousel-item img').click(function () {
     var smallImageUrl = $(this).attr('src')
-    var largeImageUrl = smallImageUrl.replace('small', 'large');
+    var largeImageUrl = smallImageUrl.replace('thumbnail', 'large').replace('small', 'large');
     $('.carousel-item-main img').attr('src', largeImageUrl)
 });
 

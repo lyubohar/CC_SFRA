@@ -1,7 +1,12 @@
 <div id="pdpCarousel-${product.id}" class="carousel slide add-space" data-interval="0" data-prev="${Resource.msg('button.previous', 'common', null)}" data-next="${Resource.msg('button.next', 'common', null)}">
 
     <div class="carousel-inner" role="listbox">
-        <isloop items="${product.images['small']}" var="image" status="loopStatus">
+        <isif condition="${product.images['thumbnail'].length > 0}">
+            <isset name="imagesType" value="${product.images['thumbnail']}" scope="page" />
+        <iselse/>
+            <isset name="imagesType" value="${product.images['small']}" scope="page" />
+        </isif>
+        <isloop items="${imagesType}" var="image" status="loopStatus">
             <button class='carousel-item <isif condition="${loopStatus.index == 0}">active</isif>'>
                 <img src="${image.url}" class="d-block img-fluid" alt="${image.alt} image number ${image.index}" itemprop="image" data-current-thumb='${image.index}' />
             </button>
