@@ -50,6 +50,8 @@
 
 .carousel-inner {
     overflow: initial;
+    width: auto;
+    padding-right: 20px;
 }
 
 .carousel-item {
@@ -59,5 +61,8 @@
     margin-right: 0;
     border: none;
     background: 0;
+    &:focus, &.active {
+        outline: 5px auto lightgray;
+    }
 }
 
