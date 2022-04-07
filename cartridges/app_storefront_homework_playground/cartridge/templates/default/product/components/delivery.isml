@@ -1,0 +1,32 @@
+<isscript>
+    var ContentMgr = require('dw/content/ContentMgr');
+    var contentAsset = ContentMgr.getContent('_lyubo_pdp_delivery');
+    var contentAssetBody = contentAsset.custom.body.toString()
+    var productIdPlaceholder = contentAssetBody.match(/\%%(.*?)\%%/g).toString()
+    var productIdStripped = productIdPlaceholder.replace(/\%%/g, '')
+    var contentAssetBodyStripped = contentAsset.custom.body.toString().replace(/\%%(.*?)\%%/g, "");
+</isscript>
+
+<isif condition="${!empty(contentAsset) && contentAsset.isOnline() && product.id === productIdStripped}">
+
+<div class="description-and-detail add-space">
+    <div class="row details collapsible-xs">
+        <div class="col-sm-12 col-md-4 col-lg-3">
+            <button class="title btn text-left btn-block d-sm-none"
+                    aria-expanded="false" aria-controls="collapsible-details-${loopState && loopState.count ? loopState.count : '1' }"
+            >
+                ${Resource.msg('label.delivery', 'common', null)}
+            </button>
+            <h2 class="title d-none d-sm-block">
+                ${Resource.msg('label.delivery', 'common', null)}
+            </h2>
+        </div>
+
+        <div class="col-sm-12 col-md-8 col-lg-9 value content" id="collapsible-details-${loopState && loopState.count ? loopState.count : '1'}">
+            <isprint value="${contentAssetBodyStripped}" encoding="off" />
+        </div>
+        
+    </div>
+</div>
+
+</isif>
