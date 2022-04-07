@@ -3,6 +3,7 @@
 
 // PDP exercise 
 
+// Attributes 
 .add-space {
     margin-top: 20px;
 }
@@ -24,15 +25,25 @@
 .select-attribute label {
     display: flex;
     border: 1px solid gray;
-    padding: 1px 4px;
+    padding: 4px 6px;
     border-radius: 5px;
     cursor: pointer;
+    margin-right: 10px;
 }
 
 .select-attribute input {
+    display: none;
     visibility: hidden;
 }
 
+.attr-element.active + label {
+    background-color: darkgray;
+    border: 1px solid darkgray;
+    color: white;
+    cursor: default;
+}
+
+// Carousel 
 .carousel {
     display: flex;
 }

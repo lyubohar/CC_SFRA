@@ -10,6 +10,10 @@ $(document).ready(function () {
         $('.carousel-item-main img').attr('src', currentImageUrl)
     });
 
+    $('.attr-element').click(function () {
+        $('.attr-element').removeClass("active");
+        $(this).addClass("active");  
+    });
 });
 
 module.exports = {
