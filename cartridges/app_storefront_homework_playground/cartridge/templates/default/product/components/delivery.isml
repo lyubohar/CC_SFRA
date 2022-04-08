@@ -1,3 +1,5 @@
+<!-- Take product ID from content asset placeholder -->
+
 <isscript>
     var ContentMgr = require('dw/content/ContentMgr');
     var contentAsset = ContentMgr.getContent('_lyubo_pdp_delivery');
@@ -25,7 +27,6 @@
         <div class="col-sm-12 col-md-8 col-lg-9 value content" id="collapsible-details-${loopState && loopState.count ? loopState.count : '1'}">
             <isprint value="${contentAssetBodyStripped}" encoding="off" />
         </div>
-        
     </div>
 </div>
 
