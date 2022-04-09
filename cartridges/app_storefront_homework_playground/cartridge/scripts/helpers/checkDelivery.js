@@ -6,9 +6,9 @@ var defaultDeliveryAsset = ContentMgr.getContent('_delivery-info-default');
 /**
  * Checks for delivery Content Assets and returns as string
  * @returns {string} body of returned content asset
- */
+*/
 
- function checkDelivery(product) {
+function checkDelivery(product) {
     var dynamicAssetId = '_delivery-info-' + product.id;
     var productDeliveryAsset = ContentMgr.getContent(dynamicAssetId);
 
