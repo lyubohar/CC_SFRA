@@ -10,6 +10,6 @@ module.exports = function (object) {
     });
     Object.defineProperty(object, 'delivery', {
         enumerable: true,
-        value: checkDelivery.checkDelivery()
+        value: checkDelivery.checkDelivery(object) // object here is the actual product object
     });    
 };

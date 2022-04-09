@@ -1,30 +1,20 @@
 <!-- Take product ID from content asset placeholder -->
 
-<isscript>
-    var ContentMgr = require('dw/content/ContentMgr');
-    var productDeliveryAsset = ContentMgr.getContent('_delivery-info-666666666666M');
-    var productId = productDeliveryAsset.ID.replace(/\_delivery-info-(.*?)/, "").toString()
-</isscript>
+<div class="description-and-detail add-space">
+    <div class="row details collapsible-xs">
+        <div class="col-sm-12 col-md-4 col-lg-3">
+            <button class="title btn text-left btn-block d-sm-none"
+                    aria-expanded="false" aria-controls="collapsible-details-${loopState && loopState.count ? loopState.count : '1' }"
+            >
+                ${Resource.msg('label.delivery', 'common', null)}
+            </button>
+            <h2 class="title d-none d-sm-block">
+                ${Resource.msg('label.delivery', 'common', null)}
+            </h2>
+        </div>
 
-<isif condition="${product.id === productId}">
-
-    <div class="description-and-detail add-space">
-        <div class="row details collapsible-xs">
-            <div class="col-sm-12 col-md-4 col-lg-3">
-                <button class="title btn text-left btn-block d-sm-none"
-                        aria-expanded="false" aria-controls="collapsible-details-${loopState && loopState.count ? loopState.count : '1' }"
-                >
-                    ${Resource.msg('label.delivery', 'common', null)}
-                </button>
-                <h2 class="title d-none d-sm-block">
-                    ${Resource.msg('label.delivery', 'common', null)}
-                </h2>
-            </div>
-
-            <div class="col-sm-12 col-md-8 col-lg-9 value content" id="collapsible-details-${loopState && loopState.count ? loopState.count : '1'}">
-                <isprint value="${product.delivery}" encoding="off" />
-            </div>
+        <div class="col-sm-12 col-md-8 col-lg-9 value content" id="collapsible-details-${loopState && loopState.count ? loopState.count : '1'}">
+            <isprint value="${product.delivery}" encoding="off" />
         </div>
     </div>
-
-</isif>
+</div>

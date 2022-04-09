@@ -1,7 +1,6 @@
 'use strict';
 
 var ContentMgr = require('dw/content/ContentMgr');
-var productDeliveryAsset = ContentMgr.getContent('_delivery-info-666666666666M');
 var defaultDeliveryAsset = ContentMgr.getContent('_delivery-info-default');
 
 /**
@@ -9,7 +8,10 @@ var defaultDeliveryAsset = ContentMgr.getContent('_delivery-info-default');
  * @returns {string} body of returned content asset
  */
 
-function checkDelivery() {
+ function checkDelivery(product) {
+    var dynamicAssetId = '_delivery-info-' + product.id;
+    var productDeliveryAsset = ContentMgr.getContent(dynamicAssetId);
+
     if (!empty(productDeliveryAsset) && productDeliveryAsset.isOnline()) {
         return productDeliveryAsset.custom.body
     } else {
