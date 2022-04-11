@@ -14,7 +14,7 @@ function checkDelivery(product) {
 
     if (!empty(productDeliveryAsset) && productDeliveryAsset.isOnline()) {
         return productDeliveryAsset.custom.body
-    } else {
+    } else if (!empty(defaultDeliveryAsset) && defaultDeliveryAsset.isOnline()) {
         return defaultDeliveryAsset.custom.body
     }
 }
