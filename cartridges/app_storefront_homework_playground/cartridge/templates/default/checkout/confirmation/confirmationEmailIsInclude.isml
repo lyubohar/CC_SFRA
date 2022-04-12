@@ -1,4 +1,4 @@
 <div class="region col-6 col-sm-4">
-    <isinclude url="${URLUtils.url('Tile-Show', 'pid', productId, 'swatches', true, 'ratings', true)}" />
+    <isinclude url="${URLUtils.url('Tile-Show', 'pid', pdict.productId.productId, 'swatches', true, 'ratings', true)}" />
 </div>
 
